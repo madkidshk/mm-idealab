@@ -556,7 +556,7 @@ footer { text-align: center; color: var(--sub); font-size: 12px; padding: 18px 0
 <body>
 <header class="site-header">
   <span class="site-title">廣告狂人 · 內容策展</span>
-  <span class="site-meta">2026-06-05 · 2026-06-05 23:59</span>
+  <span class="site-meta">2026-06-05 · 2026-06-06 00:00</span>
 </header>
 <nav class="quick-nav">
   <a href="#nblm">🟣 NBLM 底稿</a>
@@ -2260,12 +2260,14 @@ function rewriteWithSources(slug, btn) {
     .catch(e => { btn.disabled=false; btn.textContent='✍️ 用揀咗嘅 source 重新生文'; alert(e.message); });
 }
 
-// carousel: scroll 時更新 dot
+// carousel: 載入時強制去最左（最新版），scroll 時更新 dot
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.ver-track').forEach(function(track) {
+    track.scrollLeft = 0;  // 預設最新版（index 0，最左）
     var card = track.closest('.nblm-card');
     var dots = card ? card.querySelectorAll('.ver-dot') : [];
     if (!dots.length) return;
+    dots.forEach(function(d, i) { d.classList.toggle('on', i === 0); });
     track.addEventListener('scroll', function() {
       var idx = Math.round(track.scrollLeft / track.clientWidth);
       dots.forEach(function(d, i) { d.classList.toggle('on', i === idx); });
