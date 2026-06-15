@@ -1,9 +1,8 @@
-name: Encrypt & Deploy Pages
+name: Deploy Pages (no password)
 
-# 廣告狂人 idealab 全站加密（Raymond 2026-06-13 拍板：訪問原稿敏感 → 成個 site 一個密碼）。
-# 各 pipeline（content dashboard / 訪問轉錄）照 push plaintext 去 main；呢個 Action 用 staticrypt
-# AES 加密全站每個 .html（一個密碼 + 30 日 remember）+ noindex → 出 GitHub Pages。
-# 密碼 = repo secret STATICRYPT_PASSWORD（madmanhk）。salt 固定（公開冇問題）。
+# 廣告狂人 mm-idealab：Raymond 2026-06-15「拎走密碼」→ 唔再 staticrypt 加密。
+# 仍然每頁加 noindex（任何人有 link 入到，但 Google 唔收錄）。push→main 觸發 → deploy Pages。
+# 要還原密碼 = git revert 返 staticrypt 版（git history）。
 
 on:
   push:
@@ -24,34 +23,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Encrypt all HTML with staticrypt
-        env:
-          SC_PWD: ${{ secrets.STATICRYPT_PASSWORD }}
+      - name: Stage site + add noindex (no encryption)
         run: |
           set -e
           mkdir -p dist
           rsync -a --exclude='.git' --exclude='.github' --exclude='dist' ./ dist/
           count=0
           while IFS= read -r -d '' f; do
-            npx --yes staticrypt "$f" -d "$(dirname "$f")" \
-              -p "$SC_PWD" -s 'b7c1f5e2a9d3486fa0e15c7d2b8e4f60' \
-              --remember 30 --short -c false
-            # Raymond 06-14：--short 收埋 remember 剔格又冇預設剔 → 30 日 login 永遠唔生效。
-            # 強制 checkbox 預設 checked，真正記 30 日。
-            sed -i 's#id="staticrypt-remember" type="checkbox" name="remember"#id="staticrypt-remember" type="checkbox" name="remember" checked#' "$f"
-            sed -i 's#<head>#<head><meta name="robots" content="noindex,nofollow">#' "$f"
+            grep -q 'name="robots"' "$f" || sed -i 's#<head>#<head><meta name="robots" content="noindex,nofollow">#' "$f"
             count=$((count+1))
           done < <(find dist -name '*.html' -print0)
-          echo "encrypted $count html file(s)"
-          # 安全網：每個 html 都要有 staticrypt marker，否則 fail（防出街漏 plaintext）
-          missing=0
-          while IFS= read -r -d '' f; do
-            grep -q 'staticrypt' "$f" || { echo "::error::not encrypted: $f"; missing=$((missing+1)); }
-          done < <(find dist -name '*.html' -print0)
-          if [ "$missing" -gt 0 ]; then echo "::error::$missing page(s) not encrypted"; exit 1; fi
+          echo "noindex on $count html file(s); NO password gate"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
