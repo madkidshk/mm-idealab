@@ -280,8 +280,7 @@ if(!localStorage.getItem("ivhelpseen"))ovShow();
 
 // ---- safe auto-refresh (4 min) ----
 setInterval(function(){
-  // 加密頁：冇 staticrypt remember-me 唔好 reload（否則彈密碼）。preview（plaintext）冇呢 key → 唔自動 reload，正常。
-  if(!localStorage.getItem("staticrypt_passphrase"))return;
+  // 06-15 拎走密碼 → 唔再 guard staticrypt remember（之前防彈密碼，而家無密碼）。
   var a=document.activeElement;
   if(a&&(a.tagName==="INPUT"||a.tagName==="TEXTAREA"))return;
   if(staged)return;if(document.getElementById("ov").classList.contains("on"))return;
