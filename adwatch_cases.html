@@ -1,14 +1,35 @@
-<!doctype html><html lang="zh-HK"><head>
-<meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TVC/CM 觀察庫 · Madman Idea Lab</title><style>:root{--ac:#4f46e5;--gn:#0A7D3F;--bg:#f4f5f7;--bd:#e7e9ee}
+<!DOCTYPE html><html lang="zh-HK"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TVC/CM 觀察庫</title>
+<meta name="robots" content="noindex,nofollow"><style>:root{--bg:#f4f5f7;--card:#fff;--ink:#1b1f27;--mut:#717784;--line:#e7e9ee;--accent:#4f46e5;--grn:#15a34a;--red:#dc2626;--sh:0 1px 2px rgba(20,24,40,.04),0 4px 14px rgba(20,24,40,.05)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);font-family:-apple-system,"PingFang HK","Hiragino Sans","Yu Gothic","Microsoft JhengHei",sans-serif;color:#1c1d22}
-.wrap{max-width:1080px;margin:0 auto;padding:14px}
-.titlerow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:nowrap}
-.titlerow h1{font-size:20px;margin:6px 0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang HK","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:22px 15px 80px}
+h1{font-size:25px;font-weight:800;margin:.1em 0;letter-spacing:-.01em} .sub{color:var(--mut);font-size:13px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:560px){.grid{grid-template-columns:1fr 1fr}}
+.card{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px 18px;box-shadow:var(--sh)}
+.card:active{border-color:#cfd3dc}
+.dept{font-size:21px;font-weight:800} .topic{color:var(--mut);font-size:14px;margin:3px 0 11px;min-height:20px}
+.due-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.due{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:3px 10px}
+.due.ok{background:#e7f7ee;color:var(--grn)} .due.over{background:#fdeaea;color:var(--red)} .due.none{background:#eef0f3;color:var(--mut)}
+.dday{color:var(--mut);font-size:12.5px;font-weight:600}
+.go{margin-top:12px;color:var(--accent);font-size:13px;font-weight:700}
+.empty{color:var(--mut)}
+.sect{font-size:16px;font-weight:800;margin:24px 0 10px;border-left:4px solid var(--sect);padding-left:9px}
+.sect.tight{margin-top:6px}
+details.soft{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 16px;margin:18px 0;box-shadow:var(--sh)}
+details.soft>summary{cursor:pointer;font-weight:700;font-size:14px;padding:12px 0;list-style:none;color:var(--mut)}
+details.soft>summary::-webkit-details-marker{display:none} details.soft>summary::before{content:"▸ ";} details.soft[open]>summary::before{content:"▾ ";}
+details.soft .grid{margin:6px 0 12px}
+footer{color:var(--mut);font-size:12px;border-top:1px solid var(--line);margin-top:30px;padding-top:14px}.titlerow{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:nowrap}
+.titlerow h1{margin:0;min-width:0}
 .hdrbtns{flex:none;display:flex;gap:7px;align-items:center}
-.homebtn,.refbtn{flex:none;white-space:nowrap;font-size:16px;line-height:1;text-decoration:none;background:#eef0fe;border:1px solid #dcdffb;border-radius:8px;padding:5px 9px;cursor:pointer;color:#333}
-.sub{color:#6b7280;font-size:13px;margin:2px 0 12px}
+.homebtn,.refbtn{flex:none;white-space:nowrap;font-size:16px;line-height:1;text-decoration:none;background:#eef0fe;border:1px solid #dcdffb;border-radius:8px;padding:5px 9px;color:#222}
+.refbtn{cursor:pointer}
+@media(max-width:480px){.homebtn,.refbtn{font-size:14px;padding:5px 8px}}:root{--ac:#4f46e5;--gn:#0A7D3F;--bd:#e7e9ee}
+.wrap{max-width:1080px}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 .bar input[type=search]{flex:1;min-width:160px;padding:9px 11px;border:1px solid var(--bd);border-radius:10px;font-size:14px}
 .bar select{padding:9px 11px;border:1px solid var(--bd);border-radius:10px;font-size:14px;background:#fff}
@@ -23,12 +44,172 @@ details{margin:0 0 8px}summary{cursor:pointer;font-size:12.5px;color:var(--ac)}p
 .slide .tag{position:absolute;left:8px;top:8px;background:rgba(20,20,28,.6);color:#fff;font-size:11px;padding:2px 8px;border-radius:7px}.slide .zoom{position:absolute;right:8px;bottom:8px;background:rgba(20,20,28,.6);color:#fff;font-size:12px;padding:3px 8px;border-radius:7px}
 .links{display:flex;flex-wrap:wrap;gap:7px}.lk{font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:8px;border:1px solid var(--bd);background:#fff;color:#333;white-space:nowrap}
 #lb{display:none;position:fixed;inset:0;background:rgba(8,8,12,.9);z-index:999;align-items:center;justify-content:center;padding:18px}#lb.on{display:flex}#lbc img{max-width:94vw;max-height:90vh;border-radius:8px;display:block}#lbx{position:fixed;top:12px;right:16px;color:#fff;font-size:30px;line-height:1;cursor:pointer;z-index:1000}
-.empty{text-align:center;color:#9ca3af;padding:40px 0}@media(max-width:600px){.titlerow h1{font-size:18px}.wrap{padding:10px}}
+.empty{text-align:center;color:#9ca3af;padding:40px 0}@media(max-width:600px){.wrap{padding:10px}}
 </style></head><body><div class="wrap">
-<div class="titlerow"><h1>TVC/CM 觀察庫</h1><span class="hdrbtns"><a class="homebtn" href="index.html" title="總目錄">🏠</a><button class="refbtn" onclick="location.href=location.pathname+'?t='+Date.now()" title="重新載入">🔄</button></span></div>
-<div class="sub" id="sub">專門收 TVC/CM：一條片一張 card，保留 transcript、OCR、storyboard 截圖；不混入 award/campaign case 庫 · 更新 2026-06-28 09:01 HKT · 8 clips</div>
-<div class="bar"><input type="search" id="q" placeholder="搜尋品牌 / 片名 / hook / transcript…"><select id="theme"><option value="">全部主題</option><option value="品牌/生活">品牌/生活</option><option value="汽車/交通">汽車/交通</option><option value="食品/餐飲">食品/餐飲</option></select></div>
-<div id="list"><article class="card" data-theme="品牌/生活">
+<div class='titlerow'><h1>TVC/CM 觀察庫</h1><span class='hdrbtns'><a class='homebtn' href='index.html' title='總目錄'>🏠</a><button class='refbtn' onclick="location.href=location.pathname+'?t='+Date.now()+location.hash" title='重新載入'>🔄</button></span></div>
+<div class="sub">專門收 TVC/CM：一條片一張 card，保留 transcript、OCR、storyboard 截圖；不混入 award/campaign case 庫 · 更新 2026-06-29 09:02 HKT · 11 clips</div>
+<div class="bar"><input type="search" id="q" placeholder="搜尋品牌 / 片名 / hook / transcript…"><select id="theme"><option value="">全部主題</option><option value="品牌/生活">品牌/生活</option><option value="汽車/交通">汽車/交通</option><option value="食品/餐飲">食品/餐飲</option></select></div><div id="list"><article class="card" data-theme="食品/餐飲">
+<h2>SUNTORY — 川田将雅騎手×若手トップジョッキー  ノンアル座談会！ここでしか聞けないプレミアムトーク</h2>
+<div class="meta">2026-06-28 · 3064s · 17 frames · local evidence</div>
+<div class="pills"><span class="pill pt">食品/餐飲</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<p class="idea">[frame_01_001s.jpg]
+|
+サントリー特別配信                   邊
+超京華!スペシャル座談会           .  |
+~MBBEXEF by 7 a94—~      アン
+sr
+| os
+ーー  |
+%
+川田 将雅
+/ =      o             ーー
+
+[frame_02_010s.jpg]
+1
+|...</p>
+<div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
+<div class="mcar"><div class="slide" data-img="adwatch_assets/xIzNuB7c7f0.jpg"><img loading="lazy" src="adwatch_assets/xIzNuB7c7f0.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
+<details><summary>Script / transcript</summary><pre></pre></details>
+<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+|
+サントリー特別配信                   邊
+超京華!スペシャル座談会           .  |
+~MBBEXEF by 7 a94—~      アン
+sr
+| os
+ーー  |
+%
+川田 将雅
+/ =      o             ーー
+
+[frame_02_010s.jpg]
+1
+|
+超京華!スペシャル座談会                         |
+~ MBE XEE bY TI 397 $—~                    =)
+, ~~
+/どさるで     iit
+
+*
+
+|||
+
+[frame_03_020s.jpg]
+———                        Hil
+サンドリー特別配信                        |
+| 超京華!スペシャル座談会                  |
+| ~MBBEXEF by 7 a7 4—~
+4       め      】    1                    Li
+Tl       ie  1  ay   DY as     me           &gt;  |
+      に     &lt;あ2 AN ポー パ    ト
+
+[frame_04_030s.jpg]
+—                           | 2 |
+BRMIZAY+ BAS                     \ 収録に30分遅刻した横山騎手
+~/BFEXEF YAS ay +—~            |     ]   ーー
+
+[frame_05_040s.jpg]
+サン代り后特別配信
+#REIZAY + BRS                                           NT
+~ BB FXEF by 75 47+ —~             -
+ = Fe
+| | A
+ay の)
+BA              |
+=a [a]         アラ
+が                 ッ
+                        er
+
+[frame_06_050s.jpg]
+1
+PEREIRA BRS                   収録に30分遅刻した横山騎手
+~N/BFXEF by FI ay F—~         |
+|           |
+|       =&lt;
+bh          |
+で
+  1       a
+— 2 Wee 、。   中
+
+[frame_07_060s.jpg]
+HRI ZA BRS                             収録に30分遅刻した横山騎手
+~MEBEXEF YT I 39 4—~
+: 。
+; if a
+a 者   y    SS
+
+[frame_08_070s.jpg]
+|
+超豪華!スペシャル座談会
+~ MBB EXEF by FI 494 —~
+/
+x              /
+N
+ai]
+——_
+
+[frame_09_080s.jpg]
+ー                            Tih
+he bi — 45 BU ice                      |
+
+| 超京華!スペシャル座談会
+
+| MBB EXE F by FJ ay+—~
+
+|  vs        =)           7
+
+fe
+pe!        &amp;...</pre></details>
+<div class="links"><a class="lk" href="https://youtu.be/xIzNuB7c7f0" target="_blank">YouTube</a></div>
+</article>
+<article class="card" data-theme="品牌/生活">
+<h2>大塚製薬 — 365日、学校の片隅で。｜ちょっとだけ近づく #ポカリ365</h2>
+<div class="meta">2026-06-28 · 9s · 1 frames · local evidence</div>
+<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<p class="idea">[frame_01_001s.jpg]
+a
+= emer
+に デ      Po  ie       7       —
+」                      ーー ーー</p>
+<div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
+<div class="mcar"><div class="slide" data-img="adwatch_assets/fM3exl1yVDQ.jpg"><img loading="lazy" src="adwatch_assets/fM3exl1yVDQ.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
+<details><summary>Script / transcript</summary><pre></pre></details>
+<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+a
+= emer
+に デ      Po  ie       7       —
+」                      ーー ーー</pre></details>
+<div class="links"><a class="lk" href="https://youtu.be/fM3exl1yVDQ" target="_blank">YouTube</a></div>
+</article>
+<article class="card" data-theme="品牌/生活">
+<h2>大塚製薬 — 365日、学校の片隅で。｜球技大会の一日 #ポカリ365</h2>
+<div class="meta">2026-06-28 · 40s · 5 frames · local evidence</div>
+<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<p class="idea">休大会頑張るぞ。大会[音楽]
+これはひどい。そんなことあるだね。
+あ、</p>
+<div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
+<div class="mcar"><div class="slide" data-img="adwatch_assets/nOZ9BCgm2Rg.jpg"><img loading="lazy" src="adwatch_assets/nOZ9BCgm2Rg.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
+<details><summary>Script / transcript</summary><pre>休大会頑張るぞ。大会[音楽]
+これはひどい。そんなことあるだね。
+あ、</pre></details>
+<details><summary>Frame OCR / super</summary><pre>[frame_02_007s.jpg]
+SWE^ T 時   at
+.    1
+|
+チナ    コ
+#
+
+[frame_04_021s.jpg]
+rT     - ーー      = ae
+. as WL ft
+
+[frame_05_028s.jpg]
+ーー ーー      — iz
+|</pre></details>
+<div class="links"><a class="lk" href="https://youtu.be/nOZ9BCgm2Rg" target="_blank">YouTube</a></div>
+</article>
+<article class="card" data-theme="品牌/生活">
 <h2>moviecollectionjp — 【音楽が革命に】アイルランド新世代ミュージシャンたちの叫び／映画『ケルト・ユートピア』特報</h2>
 <div class="meta">2026-06-28 · 120s · 13 frames · local evidence</div>
 <div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
@@ -558,7 +739,9 @@ Garev
 プロがこだわる
 いい迫 -tutstoLn</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/4R9ogsAIsF0" target="_blank">YouTube</a></div>
-</article></div></div>
+</article></div>
+<footer>Madman Idea Lab</footer>
+</div>
 <div id="lb"><span id="lbx">✕</span><div id="lbc"></div></div>
 <script>
 const $=s=>document.querySelector(s);
