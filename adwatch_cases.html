@@ -28,30 +28,60 @@ footer{color:var(--mut);font-size:12px;border-top:1px solid var(--line);margin-t
 .hdrbtns{flex:none;display:flex;gap:7px;align-items:center}
 .homebtn,.refbtn{flex:none;white-space:nowrap;font-size:16px;line-height:1;text-decoration:none;background:#eef0fe;border:1px solid #dcdffb;border-radius:8px;padding:5px 9px;color:#222}
 .refbtn{cursor:pointer}
-@media(max-width:480px){.homebtn,.refbtn{font-size:14px;padding:5px 8px}}:root{--ac:#4f46e5;--gn:#0A7D3F;--bd:#e7e9ee}
+@media(max-width:480px){.homebtn,.refbtn{font-size:14px;padding:5px 8px}}.secthead{font-size:16px;font-weight:800;margin:24px 0 10px;border-left:4px solid #4f46e5;padding-left:9px;color:#1b1f27}
+.secthead.tight{margin-top:10px}
+.sectbadge{display:inline-block;margin-left:8px;font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px;background:#eef0fe;color:#4f46e5}.pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:#eef0f3;color:#555}
+.pill.ok{background:#e7f7ee;color:#15803d}
+.pill.warn{background:#fff4e5;color:#b45309}
+.pill.bad{background:#fdeaea;color:#dc2626}
+.pill.accent{background:#eef0fe;color:#4f46e5}details.soft{background:#fff;border:1px solid #e7e9ee;border-radius:10px;padding:4px 12px}
+details.soft>summary{cursor:pointer;font-size:12.5px;font-weight:700;color:#444;padding:8px 0;list-style:none}
+details.soft>summary::-webkit-details-marker{display:none}
+details.soft>summary::before{content:"▸ ";color:#9aa0ab}
+details.soft[open]>summary::before{content:"▾ "}.surface-card{background:#fff;border:1px solid #e7e9ee;border-radius:14px;box-shadow:0 1px 2px rgba(20,24,40,.05),0 6px 18px rgba(20,24,40,.07)}
+.surface-card.soft{background:#fafbfd}
+.surface-card.warn{background:#fff8f1;border-color:#fcd9b6}
+.surface-card.danger{border-color:#f3b4ae;box-shadow:0 2px 16px rgba(238,56,47,.08)}
+.surface-card.pad-sm{padding:9px 10px}
+.surface-card.pad-md{padding:15px 17px}
+.surface-card.pad-lg{padding:18px}
+.surface-card.selected{border-color:#4f46e5;box-shadow:0 0 0 2px rgba(79,70,229,.25),0 6px 18px rgba(79,70,229,.18)}.lbx{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;display:none;align-items:center;justify-content:center;padding:12px}
+.lbx.on{display:flex}
+.lbx img{max-width:98vw;max-height:94vh;border-radius:8px;cursor:zoom-out}
+.lbx .x{position:fixed;top:10px;right:16px;color:#fff;font-size:30px;font-weight:800;cursor:pointer}
+.lbx .hint{position:fixed;bottom:12px;left:0;right:0;text-align:center;color:#bbb;font-size:12px}.source-panel{margin:10px 0;border:1px solid #e7e9ee;border-radius:10px;padding:8px 12px;background:#fff}
+.source-panel>summary{cursor:pointer;font-size:13px;font-weight:600;color:#007aff;list-style:none}
+.source-panel>summary::-webkit-details-marker{display:none}
+.source-list{margin:8px 0}
+.source-item{display:flex;align-items:flex-start;gap:7px;padding:4px 0;font-size:12.5px;border-bottom:1px solid #e7e9ee}
+.source-item:last-child{border-bottom:none}
+.source-item input{margin-top:2px;flex-shrink:0}
+.source-type{font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;background:#f4f5f7;color:#717784;white-space:nowrap}
+.source-note-row{margin:8px 0 0}
+.source-note{width:100%;border:1px solid #e7e9ee;border-radius:10px;padding:8px 10px;font-size:13px;font-family:inherit}
+.source-note:focus{outline:2px solid #007aff;border-color:transparent}:root{--ac:#4f46e5;--gn:#0A7D3F;--bd:#e7e9ee}
 .wrap{max-width:1080px}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 .bar input[type=search]{flex:1;min-width:160px;padding:9px 11px;border:1px solid var(--bd);border-radius:10px;font-size:14px}
 .bar select{padding:9px 11px;border:1px solid var(--bd);border-radius:10px;font-size:14px;background:#fff}
-.card{background:#fff;border:1px solid var(--bd);border-radius:15px;padding:14px 15px;margin-bottom:11px}
-.card h2{font-size:16px;margin:0 0 3px;line-height:1.35}.meta{color:#6b7280;font-size:12.5px;margin-bottom:8px}
-.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}.pill{font-size:11.5px;padding:3px 9px;border-radius:999px}
-.pt{background:#eef0fe;color:var(--ac)}.pf{background:#f1f3f6;color:#555}.pa{background:#e7f5ec;color:var(--gn)}
+.watch-card{margin-bottom:11px}
+.watch-card h2{font-size:16px;margin:0 0 3px;line-height:1.35}.meta{color:#6b7280;font-size:12.5px;margin-bottom:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
 .idea{font-size:14px;line-height:1.5;margin:0 0 7px}.lesson{font-size:13px;color:#374151;background:#fafafe;border-left:3px solid var(--ac);padding:6px 10px;border-radius:0 8px 8px 0;margin:0 0 9px}
-details{margin:0 0 8px}summary{cursor:pointer;font-size:12.5px;color:var(--ac)}pre{white-space:pre-wrap;word-break:break-word;background:#f7f7f4;border:1px solid var(--bd);border-radius:8px;padding:10px;max-height:230px;overflow:auto;font-size:12px;line-height:1.48}
+details.soft{margin:0 0 8px}
+pre{white-space:pre-wrap;word-break:break-word;background:#f7f7f4;border:1px solid var(--bd);border-radius:8px;padding:10px;max-height:230px;overflow:auto;font-size:12px;line-height:1.48}
 .mcar{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border:1px solid var(--bd);border-radius:11px;margin:2px 0 10px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .slide{flex:0 0 100%;scroll-snap-align:start;position:relative;cursor:zoom-in;background:#f1f3f6}.slide img{display:block;width:100%;max-height:340px;object-fit:contain;background:#111}
 .slide .tag{position:absolute;left:8px;top:8px;background:rgba(20,20,28,.6);color:#fff;font-size:11px;padding:2px 8px;border-radius:7px}.slide .zoom{position:absolute;right:8px;bottom:8px;background:rgba(20,20,28,.6);color:#fff;font-size:12px;padding:3px 8px;border-radius:7px}
 .links{display:flex;flex-wrap:wrap;gap:7px}.lk{font-size:12.5px;text-decoration:none;padding:5px 10px;border-radius:8px;border:1px solid var(--bd);background:#fff;color:#333;white-space:nowrap}
-#lb{display:none;position:fixed;inset:0;background:rgba(8,8,12,.9);z-index:999;align-items:center;justify-content:center;padding:18px}#lb.on{display:flex}#lbc img{max-width:94vw;max-height:90vh;border-radius:8px;display:block}#lbx{position:fixed;top:12px;right:16px;color:#fff;font-size:30px;line-height:1;cursor:pointer;z-index:1000}
 .empty{text-align:center;color:#9ca3af;padding:40px 0}@media(max-width:600px){.wrap{padding:10px}}
 </style></head><body><div class="wrap">
 <div class='titlerow'><h1>TVC/CM 觀察庫</h1><span class='hdrbtns'><a class='homebtn' href='index.html' title='總目錄'>🏠</a><button class='refbtn' onclick="location.href=location.pathname+'?t='+Date.now()+location.hash" title='重新載入'>🔄</button></span></div>
-<div class="sub">專門收 TVC/CM：一條片一張 card，保留 transcript、OCR、storyboard 截圖；不混入 award/campaign case 庫 · 更新 2026-06-29 09:02 HKT · 11 clips</div>
-<div class="bar"><input type="search" id="q" placeholder="搜尋品牌 / 片名 / hook / transcript…"><select id="theme"><option value="">全部主題</option><option value="品牌/生活">品牌/生活</option><option value="汽車/交通">汽車/交通</option><option value="食品/餐飲">食品/餐飲</option></select></div><div id="list"><article class="card" data-theme="食品/餐飲">
+<div class="sub">專門收 TVC/CM：一條片一張 card，保留 transcript、OCR、storyboard 截圖；不混入 award/campaign case 庫 · 更新 2026-06-29 11:59 HKT · 11 clips</div>
+<div class="bar"><input type="search" id="q" placeholder="搜尋品牌 / 片名 / hook / transcript…"><select id="theme"><option value="">全部主題</option><option value="品牌/生活">品牌/生活</option><option value="汽車/交通">汽車/交通</option><option value="食品/餐飲">食品/餐飲</option></select></div><div id="list"><article class="surface-card pad-md watch-card" data-theme="食品/餐飲">
 <h2>SUNTORY — 川田将雅騎手×若手トップジョッキー  ノンアル座談会！ここでしか聞けないプレミアムトーク</h2>
 <div class="meta">2026-06-28 · 3064s · 17 frames · local evidence</div>
-<div class="pills"><span class="pill pt">食品/餐飲</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">食品/餐飲</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">[frame_01_001s.jpg]
 |
 サントリー特別配信                   邊
@@ -69,8 +99,8 @@ sr
 |...</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/xIzNuB7c7f0.jpg"><img loading="lazy" src="adwatch_assets/xIzNuB7c7f0.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre></pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Script / transcript</summary><pre></pre></details>
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 |
 サントリー特別配信                   邊
 超京華!スペシャル座談会           .  |
@@ -162,10 +192,10 @@ fe
 pe!        &amp;...</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/xIzNuB7c7f0" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="品牌/生活">
+<article class="surface-card pad-md watch-card" data-theme="品牌/生活">
 <h2>大塚製薬 — 365日、学校の片隅で。｜ちょっとだけ近づく #ポカリ365</h2>
 <div class="meta">2026-06-28 · 9s · 1 frames · local evidence</div>
-<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">品牌/生活</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">[frame_01_001s.jpg]
 a
 = emer
@@ -173,27 +203,27 @@ a
 」                      ーー ーー</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/fM3exl1yVDQ.jpg"><img loading="lazy" src="adwatch_assets/fM3exl1yVDQ.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre></pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Script / transcript</summary><pre></pre></details>
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 a
 = emer
 に デ      Po  ie       7       —
 」                      ーー ーー</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/fM3exl1yVDQ" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="品牌/生活">
+<article class="surface-card pad-md watch-card" data-theme="品牌/生活">
 <h2>大塚製薬 — 365日、学校の片隅で。｜球技大会の一日 #ポカリ365</h2>
 <div class="meta">2026-06-28 · 40s · 5 frames · local evidence</div>
-<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">品牌/生活</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">休大会頑張るぞ。大会[音楽]
 これはひどい。そんなことあるだね。
 あ、</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/nOZ9BCgm2Rg.jpg"><img loading="lazy" src="adwatch_assets/nOZ9BCgm2Rg.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre>休大会頑張るぞ。大会[音楽]
+<details class="soft"><summary>Script / transcript</summary><pre>休大会頑張るぞ。大会[音楽]
 これはひどい。そんなことあるだね。
 あ、</pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_02_007s.jpg]
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_02_007s.jpg]
 SWE^ T 時   at
 .    1
 |
@@ -209,10 +239,10 @@ rT     - ーー      = ae
 |</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/nOZ9BCgm2Rg" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="品牌/生活">
+<article class="surface-card pad-md watch-card" data-theme="品牌/生活">
 <h2>moviecollectionjp — 【音楽が革命に】アイルランド新世代ミュージシャンたちの叫び／映画『ケルト・ユートピア』特報</h2>
 <div class="meta">2026-06-28 · 120s · 13 frames · local evidence</div>
-<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">品牌/生活</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">[frame_02_010s.jpg]
 ー  -    ごミコ  &gt;.  は   &gt;  a  Serie = se    ee
 - 国境で南北に分断された島=”
@@ -225,8 +255,8 @@ mw          ne fad MAPLE | FN 王
 [frame...</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/zSs3ufsdvSw.jpg"><img loading="lazy" src="adwatch_assets/zSs3ufsdvSw.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre></pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_02_010s.jpg]
+<details class="soft"><summary>Script / transcript</summary><pre></pre></details>
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_02_010s.jpg]
 ー  -    ごミコ  &gt;.  は   &gt;  a  Serie = se    ee
 - 国境で南北に分断された島=”
 ニニ    ete
@@ -302,10 +332,10 @@ ta +) ie       wT       ;       2)
 fe</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/zSs3ufsdvSw" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="品牌/生活">
+<article class="surface-card pad-md watch-card" data-theme="品牌/生活">
 <h2>大塚製薬 — 365日、学校の片隅で。｜体育終わりの大繁盛 #ポカリ365</h2>
 <div class="meta">2026-06-27 · 14s · 2 frames · local evidence</div>
-<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">品牌/生活</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">[frame_01_001s.jpg]
 -
 
@@ -313,18 +343,18 @@ fe</pre></details>
 -</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/EUuWg2-vMYk.jpg"><img loading="lazy" src="adwatch_assets/EUuWg2-vMYk.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre></pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Script / transcript</summary><pre></pre></details>
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 -
 
 [frame_02_004s.jpg]
 -</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/EUuWg2-vMYk" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="品牌/生活">
+<article class="surface-card pad-md watch-card" data-theme="品牌/生活">
 <h2>moviecollectionjp — 【HANA・NAOKO】ホームシアター楽しみたい！ #HANA #NAOKO</h2>
 <div class="meta">2026-06-27 · 30s · 6 frames · local evidence</div>
-<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">品牌/生活</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">LED
 小型プロジェクターとロボット掃除機ということで
 小型プロジェクターはなぜ選ばれたんですか?今プロジェクター持ってるメンバーが多くてお家に遊びに行った時に
@@ -336,7 +366,7 @@ fe</pre></details>
 あ、もうめっち...</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/TVjAKhkhX_Y.jpg"><img loading="lazy" src="adwatch_assets/TVjAKhkhX_Y.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre>LED
+<details class="soft"><summary>Script / transcript</summary><pre>LED
 小型プロジェクターとロボット掃除機ということで
 小型プロジェクターはなぜ選ばれたんですか?今プロジェクター持ってるメンバーが多くてお家に遊びに行った時に
 いいなあと思って私もお家すごいことにしようと思いました。
@@ -345,7 +375,7 @@ fe</pre></details>
 やりたいですね。
 もうなんかあれみたいなとかも心に決めてたりするんですね。
 あ、もうめっちゃ決めてます。y</pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 HANA・ NAOKO
 n         |
 | ee |
@@ -389,19 +419,19 @@ mm楽げがたい/ q
 q Amazon 「ブプライリテニ」 記者発表会</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/TVjAKhkhX_Y" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="品牌/生活">
+<article class="surface-card pad-md watch-card" data-theme="品牌/生活">
 <h2>アニプレックス チャンネル — アニメ「リラックマ」#13|※2週間限定配信【7/11(土)23:59まで】</h2>
 <div class="meta">2026-06-27 · 90s · 9 frames · local evidence</div>
-<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">品牌/生活</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">イラクマたちどこから行くのかな?あ、小まちゃん。小まちゃんも一緒なんだね。
 パスポートもしかして海外旅行?え?リラックマあった。トト行ってらっしゃい。
 ただそこにいて君らしまで君の女のです心が温ま</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/pSXKagMTXRo.jpg"><img loading="lazy" src="adwatch_assets/pSXKagMTXRo.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre>イラクマたちどこから行くのかな?あ、小まちゃん。小まちゃんも一緒なんだね。
+<details class="soft"><summary>Script / transcript</summary><pre>イラクマたちどこから行くのかな?あ、小まちゃん。小まちゃんも一緒なんだね。
 パスポートもしかして海外旅行?え?リラックマあった。トト行ってらっしゃい。
 ただそこにいて君らしまで君の女のです心が温ま</pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 \
 
 [frame_03_020s.jpg]
@@ -454,17 +484,17 @@ N
 し3       (ey</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/pSXKagMTXRo" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="品牌/生活">
+<article class="surface-card pad-md watch-card" data-theme="品牌/生活">
 <h2>大塚製薬 — 365日、学校の片隅で。｜女子高生の会話の沼 #ポカリ365</h2>
 <div class="meta">2026-06-27 · 26s · 6 frames · local evidence</div>
-<div class="pills"><span class="pill pt">品牌/生活</span><span class="pill pf">TVC/CM · frame sampling</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">品牌/生活</span><span class="pill">TVC/CM · frame sampling</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">情けなって何使いやね。けなくないけない。普通に会社なんか口なけどこうやってきない。え、これけない。
 Bra</p>
 <div class="lesson">觀察重點：先保留 transcript、OCR、storyboard frames，之後再由 Madman/NLM 深挖成 TVC/CM 觀察。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/HPGGEIDEVEk.jpg"><img loading="lazy" src="adwatch_assets/HPGGEIDEVEk.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre>情けなって何使いやね。けなくないけない。普通に会社なんか口なけどこうやってきない。え、これけない。
+<details class="soft"><summary>Script / transcript</summary><pre>情けなって何使いやね。けなくないけない。普通に会社なんか口なけどこうやってきない。え、これけない。
 Bra</pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_03_008s.jpg]
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_03_008s.jpg]
 0       fr
 —— ih,   デー      ー  7     ーーーーーー-
 に My Si  =&quot;  in Mk ーーーー」
@@ -482,14 +512,14 @@ aan          se       ここ
 も  ~~</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/HPGGEIDEVEk" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="食品/餐飲">
+<article class="surface-card pad-md watch-card" data-theme="食品/餐飲">
 <h2>SUNTORY / のんある酒場 — のんある酒場『居酒屋客のマインドでスーパーに来たらマリアージュした男』篇 1分19秒 レインボー ジャンボたかお サントリー</h2>
 <div class="meta">2026-06-26 · 80s · 13 frames · local evidence</div>
-<div class="pills"><span class="pill pt">食品/餐飲</span><span class="pill pf">實拍 · 場景錯位 · food pairing</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">食品/餐飲</span><span class="pill">實拍 · 場景錯位 · food pairing</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">由日常飲食場景切入，把 non-alcohol 產品放入居酒屋/小食 pairing 情境，降低「無酒精」的理性距離。</p>
 <div class="lesson">觀察重點：功能型產品可借飲食場景重新定位，讓觀眾先想起使用時刻，再接受產品。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/3AUoHqBr5PQ.jpg"><img loading="lazy" src="adwatch_assets/3AUoHqBr5PQ.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre>どせ大将やってる。
+<details class="soft"><summary>Script / transcript</summary><pre>どせ大将やってる。
 今日も来ちゃったよ。
 1名様毎
 あら、カウンター開いてるわよ。
@@ -512,7 +542,7 @@ aan          se       ここ
 うまそうすぎる。
 酒から作ってるからつもの相飯に合う。サントリーノンアル酒。
 あ。</pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 |
 “4h
 fa ‘
@@ -591,20 +621,20 @@ _ た   oy  -        ーーー            os YY
 = ae =</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/3AUoHqBr5PQ" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="食品/餐飲">
+<article class="surface-card pad-md watch-card" data-theme="食品/餐飲">
 <h2>SUNTORY / CRAFT BOSS — クラフトボス 世界のTEA『人生変わるかも？インドトレイン』篇 42秒 とにかく明るい安村 サントリー</h2>
 <div class="meta">2026-06-26 · 43s · 7 frames · local evidence</div>
-<div class="pills"><span class="pill pt">食品/餐飲</span><span class="pill pf">實拍 · 假體驗證言 · 異國 visual device</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">食品/餐飲</span><span class="pill">實拍 · 假體驗證言 · 異國 visual device</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">把飲品 launch 包成一程「印度列車」體驗，用乘客證言同異國 visual 去放大一句「人生可能會變」。</p>
 <div class="lesson">觀察重點：普通產品賣點可以變成可感受的假體驗，再用 testimonial 格式令荒謬感變可信。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/QMtWiUVcaCc.jpg"><img loading="lazy" src="adwatch_assets/QMtWiUVcaCc.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre>夜だけでインド気分になれる電車が登場。
+<details class="soft"><summary>Script / transcript</summary><pre>夜だけでインド気分になれる電車が登場。
 インド行くってこういうことなんだなって。
 窓の外ここインドなのって思っちゃうぐらい本当にインド行った気分になれるんですよ。その日の昼ご飯はインドカレーにしました。インド行くと人生変わるって言うじゃないですか。本当に変わったような気もして。爪を切る最適なタイミングが分かった気します。人生変わったってことですかね。
 六書がなんだか読める気がして読んでないんですけど。
 世界のTプレゼンツ人生変わるかも。
 インドトレイン気分だけでもバケ</pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 F    (   に       : We
 
 [frame_02_007s.jpg]
@@ -657,14 +687,14 @@ ae y =) 4  8
 実際にどうだったかの感想もお待ちしております。</pre></details>
 <div class="links"><a class="lk" href="https://youtu.be/QMtWiUVcaCc" target="_blank">YouTube</a></div>
 </article>
-<article class="card" data-theme="汽車/交通">
+<article class="surface-card pad-md watch-card" data-theme="汽車/交通">
 <h2>Honda / CIVIC — 【CIVIC】プロがこだわる「いい道具」に共通するものとは｜岩井明愛×岩井千怜×中野信治インプレッション動画 Short Ver.</h2>
 <div class="meta">2026-06-25 · 30s · 6 frames · local evidence</div>
-<div class="pills"><span class="pill pt">汽車/交通</span><span class="pill pf">實拍 · 產品體驗 · 名人/專業人士試用</span><span class="pill pa">TVC/CM AdWatch</span></div>
+<div class="pills"><span class="pill accent">汽車/交通</span><span class="pill">實拍 · 產品體驗 · 名人/專業人士試用</span><span class="pill ok">TVC/CM AdWatch</span></div>
 <p class="idea">用試乘者的手感、聲音、安心感去講車，不硬 sell 規格，而是把產品賣點轉成駕駛體驗。</p>
 <div class="lesson">觀察重點：汽車片未必要先講 spec；有 credibility 的用家視角，可以把性能變成情緒。</div>
 <div class="mcar"><div class="slide" data-img="adwatch_assets/4R9ogsAIsF0.jpg"><img loading="lazy" src="adwatch_assets/4R9ogsAIsF0.jpg" alt=""><span class="tag">Storyboard frames</span><span class="zoom">放大</span></div></div>
-<details><summary>Script / transcript</summary><pre>早速出発したいと思います。
+<details class="soft"><summary>Script / transcript</summary><pre>早速出発したいと思います。
 この音いですね。
 いや、気持ちいいですね。足だけではなくて本当互感を刺撃するで分かるかな?今の速さとか
 やっぱり気持ちが高ぶりますね。乗って楽しいです。
@@ -674,7 +704,7 @@ ae y =) 4  8
 3倍かっこよく見えない。
 間違いない。これはたまらない。
 [笑い]</pre></details>
-<details><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
+<details class="soft"><summary>Frame OCR / super</summary><pre>[frame_01_001s.jpg]
 CIiVic
 Grey |
 a ゃ    ・
@@ -742,7 +772,7 @@ Garev
 </article></div>
 <footer>Madman Idea Lab</footer>
 </div>
-<div id="lb"><span id="lbx">✕</span><div id="lbc"></div></div>
+<div id="lb" class="lbx"><span id="lbx" class="x">✕</span><div id="lbc"></div><div class="hint">點一下關閉</div></div>
 <script>
 const $=s=>document.querySelector(s);
 function render(){
