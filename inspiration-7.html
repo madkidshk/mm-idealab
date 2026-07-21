@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>廣告狂人 · 內容策展</title>
+<style>
+:root {
+  --bg: #F2F2F7;
+  --card: #FFFFFF;
+  --ink: #1C1C1E;
+  --sub: #8E8E93;
+  --line: #D1D1D6;
+  --red: #EE382F;
+  --red-bg: #FFF3F2;
+  --blue: #007AFF;
+  --green: #34C759;
+  --r: 16px;
+  --r-sm: 10px;
+  --shadow: 0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box}
+.btn{background:#4f46e5;color:#fff;border:none;border-radius:9px;padding:8px 13px;font-size:12.5px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:#fff;color:#4f46e5;border:1.5px solid #dcdffb}
+.btn.grn{background:#15a34a}
+.btn.mini{padding:4px 9px;font-size:11px}
+.btn:hover,.btn.ghost:hover{filter:brightness(.98)}
+details.soft{background:#fff;border:1px solid #e7e9ee;border-radius:10px;padding:4px 12px}
+details.soft>summary{cursor:pointer;font-size:12.5px;font-weight:700;color:#444;padding:8px 0;list-style:none}
+details.soft>summary::-webkit-details-marker{display:none}
+details.soft>summary::before{content:"▸ ";color:#9aa0ab}
+details.soft[open]>summary::before{content:"▾ "}
+.card{background:#fff;border:1px solid #e7e9ee;border-radius:14px;padding:15px 17px;box-shadow:0 1px 2px rgba(20,24,40,.04),0 4px 14px rgba(20,24,40,.05)}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:#eef0f3;color:#555}
+.pill.ok{background:#e7f7ee;color:#15803d}
+.pill.warn{background:#fff4e5;color:#b45309}
+.pill.bad{background:#fdeaea;color:#dc2626}
+.pill.accent{background:#eef0fe;color:#4f46e5}
+.secthead{font-size:16px;font-weight:800;margin:24px 0 10px;border-left:4px solid #4f46e5;padding-left:9px;color:#1b1f27}
+.secthead.tight{margin-top:10px}
+.sectbadge{display:inline-block;margin-left:8px;font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px;background:#eef0fe;color:#4f46e5}
+.carousel{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;-webkit-overflow-scrolling:touch}
+.carousel::-webkit-scrollbar{height:6px}
+.carousel::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:6px}
+.carousel-card{flex:0 0 88%;max-width:340px;scroll-snap-align:center;scroll-snap-stop:always;background:#fff;border:1.5px solid #e7e9ee;border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(20,24,40,.05),0 6px 18px rgba(20,24,40,.07)}
+@media(min-width:700px) and (max-width:1099px){.carousel-card{flex:0 0 46%}}
+@media(min-width:1100px){.carousel{flex-wrap:wrap;overflow-x:visible;scroll-snap-type:none;gap:14px}.carousel-card{flex:0 0 calc(33.333% - 10px);max-width:none;scroll-snap-align:none}}
+.badge{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#4f46e5;border-radius:7px;padding:2px 9px;letter-spacing:.02em}
+.score-badge{display:inline-block;background:#c79a2b;color:#fff;font-size:12px;font-weight:800;border-radius:20px;padding:2px 10px}
+.status-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:2px 7px}
+.status-badge.ok{background:#dcfce7;color:#15803d}
+.status-badge.warn{background:#fef3c7;color:#a16207}
+.status-badge.bad{background:#fee2e2;color:#b91c1c}
+.status-badge.mute{background:#eef0f3;color:#717784}
+.surface-card{background:#fff;border:1px solid #e7e9ee;border-radius:14px;box-shadow:0 1px 2px rgba(20,24,40,.05),0 6px 18px rgba(20,24,40,.07)}
+.surface-card.soft{background:#fafbfd}
+.surface-card.warn{background:#fff8f1;border-color:#fcd9b6}
+.surface-card.danger{border-color:#f3b4ae;box-shadow:0 2px 16px rgba(238,56,47,.08)}
+.surface-card.pad-sm{padding:9px 10px}
+.surface-card.pad-md{padding:15px 17px}
+.surface-card.pad-lg{padding:18px}
+.surface-card.selected{border-color:#4f46e5;box-shadow:0 0 0 2px rgba(79,70,229,.25),0 6px 18px rgba(79,70,229,.18)}
+.monitor-wrap{margin-bottom:12px}
+.mon-title{font-size:13px;font-weight:800;color:#1f2937;margin:0 0 8px}
+.mon-row{background:#fff;border:1px solid #e7e9ee;border-radius:12px;margin-bottom:8px;overflow:hidden}
+.mon-row>summary{display:flex;align-items:center;gap:8px;padding:11px 14px;cursor:pointer;list-style:none;user-select:none;font-size:13px;font-weight:700;color:#1f2937}
+.mon-row>summary::-webkit-details-marker{display:none}
+.mon-row[open]>summary{border-bottom:1px solid #eef0f3;background:#fafbfd}
+.mon-badge{margin-left:auto;display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#4f46e5;border-radius:999px;padding:2px 8px}
+.mon-list{margin:0;padding:8px 14px 12px 30px;font-size:12.5px;color:#4b5563}
+.mon-list li+li{margin-top:6px}
+.review-list{padding:4px 0;border-top:1px solid #e7e9ee}
+.review-row{border-bottom:1px solid #e7e9ee}
+.review-row:last-child{border-bottom:none}
+.review-row>summary{display:flex;align-items:center;gap:8px;padding:11px 18px;cursor:pointer;list-style:none;user-select:none}
+.review-row>summary::-webkit-details-marker{display:none}
+.review-medal{font-size:16px}
+.review-label{font-size:14px;font-weight:600;flex:1}
+.review-score{font-size:13px;font-weight:700;color:#717784;background:#f4f5f7;border-radius:20px;padding:2px 10px}
+.review-body{padding:6px 18px 14px}
+.review-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.info-card{margin-bottom:12px}
+.info-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.info-title{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
+.info-meta{display:flex;gap:5px;flex-wrap:wrap}
+.meta-tag{background:#f4f5f7;border:1px solid #e7e9ee;color:#717784;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:6px}
+.info-strip{font-size:12px;color:#0891b2;background:#ecfeff;border-radius:7px;padding:4px 9px;margin-bottom:8px}
+.info-block{font-size:13.5px;color:#39414e;margin-bottom:6px;line-height:1.55}
+.info-callout{background:#fff7f6;border-left:3px solid #dc2626;padding:6px 10px;border-radius:6px}
+.info-key{font-weight:700;color:#1b1f27;margin-right:5px}
+.info-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12.5px}
+.info-link{color:#007aff;font-weight:600}
+.info-code{font-family:monospace;color:#717784;font-size:11.5px}
+.cal-card{border-left:4px solid #dc2626}
+.cal-row{font-size:14px;font-weight:600;color:#1b1f27;margin-bottom:4px}
+.cal-tag{display:inline-block;background:#dc2626;color:#fff;font-size:12px;font-weight:700;border-radius:6px;padding:1px 8px;margin-left:4px}
+.cal-none{color:#717784;font-weight:400}
+.cal-sub{font-size:12.5px;color:#555;margin-top:4px}
+.cal-mute{color:#717784}
+.fact-box{margin:10px 0;border:1px solid #e7e9ee;border-radius:10px;padding:9px 11px;background:#fafafb}
+.fact-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.fact-pill{font-size:12px;font-weight:800;border-radius:20px;padding:1px 8px}
+.fact-pill.ok{background:#e7f7ec;color:#1a7f37}
+.fact-pill.bad{background:#fde7e7;color:#c81e1e}
+.fact-pill.unv{background:#fff4e0;color:#b45309}
+.fact-pill.mute{background:#f4f5f7;color:#717784}
+.fact-hint{font-size:11px;color:#717784}
+.fact-detail{margin-top:7px}
+.fact-detail>summary{font-size:12px;font-weight:600;color:#007aff;cursor:pointer}
+.fact-flag{font-size:12.5px;margin:6px 0;padding:6px 9px;border-radius:7px;line-height:1.5}
+.fact-flag.bad{background:#fdecec;border-left:3px solid #c81e1e}
+.fact-flag.unv{background:#fff7ea;border-left:3px solid #b45309}
+.fact-correct{color:#1a7f37;font-size:12px;margin-top:3px}
+.fact-note{color:#717784}
+.fact-cross{font-size:11.5px;color:#5b6472;margin-top:4px;padding-top:4px;border-top:1px dashed #e7e9ee}
+.fact-allok{font-size:12.5px;color:#1a7f37;font-weight:600}
+.cta-primary{display:block;width:100%;margin-top:12px;background:#1c1c1e;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;padding:11px;cursor:pointer;font-family:inherit}
+.cta-primary:hover{background:#333}
+.cta-primary:disabled{background:#999;cursor:default}
+.cta-banner{display:block;background:linear-gradient(135deg,#111 0%,#333 100%);color:#fff;font-weight:800;font-size:14px;padding:13px 18px;border-radius:10px;text-align:center;margin-bottom:20px;box-shadow:0 3px 12px rgba(0,0,0,.15)}
+.source-panel{margin:10px 0;border:1px solid #e7e9ee;border-radius:10px;padding:8px 12px;background:#fff}
+.source-panel>summary{cursor:pointer;font-size:13px;font-weight:600;color:#007aff;list-style:none}
+.source-panel>summary::-webkit-details-marker{display:none}
+.source-list{margin:8px 0}
+.source-item{display:flex;align-items:flex-start;gap:7px;padding:4px 0;font-size:12.5px;border-bottom:1px solid #e7e9ee}
+.source-item:last-child{border-bottom:none}
+.source-item input{margin-top:2px;flex-shrink:0}
+.source-type{font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;background:#f4f5f7;color:#717784;white-space:nowrap}
+.source-note-row{margin:8px 0 0}
+.source-note{width:100%;border:1px solid #e7e9ee;border-radius:10px;padding:8px 10px;font-size:13px;font-family:inherit}
+.source-note:focus{outline:2px solid #007aff;border-color:transparent}
+.editor-card{border-left:4px solid #7c3aed}
+.editor-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.editor-badge{display:inline-block;background:#7c3aed;color:#fff;font-size:11px;font-weight:800;border-radius:20px;padding:2px 9px}
+.editor-slug{font-size:11px;color:#717784;font-family:monospace}
+.editor-title{font-size:17px;font-weight:800;line-height:1.4;margin-bottom:12px}
+.editor-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding-bottom:4px;margin-bottom:6px}
+.editor-track::-webkit-scrollbar{height:0}
+.editor-panel{flex:0 0 100%;min-width:100%;scroll-snap-align:start}
+.editor-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.editor-note{font-size:12px;color:#1b1f27;font-weight:600}
+.editor-ts{font-size:11px;color:#717784;font-family:monospace;margin-left:auto}
+.editor-hint{font-size:11px;color:#7c3aed;font-weight:600;margin-left:auto}
+.editor-dots{display:flex;gap:6px;justify-content:center;margin-bottom:10px}
+.editor-dot{width:7px;height:7px;border-radius:50%;background:#e7e9ee;transition:background .2s}
+.editor-dot.on{background:#7c3aed}
+.editor-body{font-size:14px;line-height:1.8;color:#39414e;white-space:pre-wrap;max-height:420px;overflow-y:auto;border:1px solid #e7e9ee;border-radius:10px;padding:12px 14px;background:#fafafb}
+* { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "PingFang HK", "Microsoft JhengHei", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 15px;
+}
+a { text-decoration: none; }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: #111; color: #fff;
+  padding: 11px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+}
+.site-title { font-size: 15px; font-weight: 800; letter-spacing: .3px; white-space: nowrap; }
+.site-meta { font-size: 11px; opacity: .5; white-space: nowrap; }
+
+/* Quick nav */
+.quick-nav {
+  display: flex; gap: 6px;
+  padding: 10px 16px 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.quick-nav a {
+  display: inline-block;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+.quick-nav a:hover { background: #f0f0f5; }
+
+/* Main wrap */
+.wrap { max-width: 680px; margin: 0 auto; padding: 10px 14px 80px; }
+
+/* Section */
+.sec-block { margin-bottom: 28px; }
+.sec-head {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-badge {
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 20px;
+  padding: 1px 8px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Buttons */
+.btn {
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 12px;
+}
+.btn-red {
+  background: var(--red);
+  color: #fff;
+}
+.btn-red:hover { background: #d62e26; }
+.btn-ghost {
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { background: var(--line); }
+.btn-sm { font-size: 13px; padding: 7px 14px; }
+
+/* 待出街 card */
+.pub-card {
+  border: 2px solid var(--red);
+  padding: 18px 18px 16px;
+  margin-bottom: 12px;
+}
+.pub-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.pub-byline { font-size: 13px; color: var(--sub); font-weight: 600; }
+.score-chip {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 20px;
+  padding: 1px 9px;
+  margin-left: 6px;
+}
+.slug-tag {
+  font-size: 11px;
+  color: var(--sub);
+  font-family: monospace;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+.pub-title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 4px 0 8px;
+}
+.pub-snippet {
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.55;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* AI 擂台 */
+.arena-block { margin-bottom: 16px; overflow: hidden; }
+.arena-topic {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sub);
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.winner-card { padding: 16px 18px; border-left: 4px solid var(--red); background: var(--red-bg); }
+.winner-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.medal { font-size: 22px; }
+.winner-meta { display: flex; align-items: center; gap: 8px; }
+.winner-label { font-size: 14px; font-weight: 700; color: var(--ink); }
+.winner-meta .score-badge { background: var(--red); font-size: 13px; }
+.winner-title {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+.winner-sub {
+  font-size: 12px;
+  color: var(--sub);
+  margin-bottom: 10px;
+}
+.runners {
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+}
+/* collapsible inside winner */
+.expand > summary {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  list-style: none;
+  user-select: none;
+}
+.expand > summary::-webkit-details-marker { display: none; }
+
+/* Judge notes */
+.jnotes { background: #F7F7FA; border-radius: var(--r-sm); padding: 10px 12px; margin: 10px 0 6px; }
+.jn {
+  font-size: 12.5px;
+  color: #444;
+  margin-bottom: 7px;
+  line-height: 1.55;
+}
+.jn:last-child { margin-bottom: 0; }
+.jn-judge { color: var(--ink); margin-right: 4px; }
+.jn-taste {
+  background: var(--line);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 11px;
+  color: var(--sub);
+  margin-right: 6px;
+}
+.jn-note { color: #5b6472; }
+.article-pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: #39414e;
+  line-height: 1.75;
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+.no-body { font-size: 13px; color: var(--sub); font-style: italic; margin-top: 6px; }
+
+/* 今日新料 cards */
+.pill {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.cand-card { margin-bottom: 12px; }
+.cand-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.fresh-row { margin-bottom: 8px; }
+
+/* Calendar */
+.cal-card { margin-bottom: 12px; }
+
+/* Monitor */
+.monitor-wrap .mon-title { color: var(--sub); font-weight: 700; }
+.monitor-wrap .mon-badge { background: var(--red); }
+.monitor-wrap .mon-list { list-style: none; }
+.monitor-wrap .mon-list li { border-top: 1px solid var(--line); padding: 6px 0; }
+.mon-list a { display: block; color: var(--blue); font-size: 13px; }
+.mon-date { font-family: monospace; font-size: 11px; color: var(--sub); margin-right: 6px; }
+
+/* Empty / utility */
+.empty-state {
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-sm);
+  text-align: center;
+  padding: 22px;
+  color: var(--sub);
+  font-size: 14px;
+}
+.empty-state code { background: var(--bg); border-radius: 4px; padding: 1px 5px; font-size: 12px; }
+
+/* NBLM / version rail */
+.nblm-card { margin-bottom: 14px; }
+.ver-badge { background: var(--sub); }
+.ver-badge.newest { background: #7C3AED; }
+.ver-dot { background: var(--line); }
+.nblm-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+.multi-done { font-size: 13px; color: var(--green); font-weight: 600; }
+.btn-dark {
+  background: var(--ink); color: #fff;
+}
+.btn-dark:hover { background: #333; }
+.btn-dark:disabled { background: #999; cursor: default; }
+
+/* Back to top */
+.totop {
+  position: fixed;
+  right: 16px; bottom: 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0,0,0,.22);
+}
+
+/* Footer */
+footer { text-align: center; color: var(--sub); font-size: 12px; padding: 18px 0 30px; }
+
+.write-btn{margin-top:12px}
+</style>
+</head>
+<body>
+<!-- generated-by: scripts/core/nlm-bridge/lab_ui_shell.py -->
+<header class="site-header">
+  <span class="site-title">廣告狂人 · 內容策展</span>
+  <span class="site-meta">2026-07-21 · 2026-07-21 19:18</span>
+</header>
+<nav class="quick-nav">
+  <a href="#nblm">🟣 NBLM 底稿</a>
+  
+  
+  
+  
+  <a href="index.html">🏠 總目錄</a>
+</nav>
+<div class="wrap" id="top">
+  
+  <section class="sec-block" id="nblm"><div class="sec-head">🟣 NBLM 底稿 — 睇完先決定（第 7/7 頁 · 共 76 篇） <span class="sec-badge">76</span></div><nav class="quick-nav"><a href="inspiration-6.html">← 上一頁</a><a>第 7 / 7 頁</a></nav>
+<div class="nblm-card surface-card pad-lg editor-card" id="nblm-business-as-usual-is-a-dangerous-fantasy-for-adver">
+  <div class="nblm-header editor-head">
+    <span class="nblm-badge editor-badge">NBLM</span>
+    <span class="nblm-slug editor-slug">business-as-usual-is-a-dangerous-fantasy-for-adver</span>
+    
+  </div>
+  <h3 class="nblm-title editor-title">Business as usual is a dangerous fantasy for advertisers to believe in</h3>
+  
+  
+  <div class="ver-track editor-track" id="track-business-as-usual-is-a-dangerous-fantasy-for-adver">
+    <div class="ver-panel editor-panel" data-slug="business-as-usual-is-a-dangerous-fantasy-for-adver" data-idx="0">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
+        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-06-09T09:13</span></div>
+      <div class="nblm-body editor-body">廣告界近年最危險的傾向，唔係預算唔夠，唔係市道唔好，而係大家仲沉溺喺「一切如常」（Business as Usual, BAU）嘅幻想入面。在數據隱私法規收緊與技術顛覆的多重壓迫下，維持舊有運作模式不再是「穩陣」的選擇，而是品牌走向慢性自殺、代理商集體收皮的開端。在今日的市場環境，「原地踏步」往往就是成本最高昂的一項決策。如果你仲以為靠套用舊年嗰份 template 就可以過骨，你唔係天真，你係直情同商業現實脫節。
+
+根據羅兵咸永道（PwC）的最新預測，這場由技術驅動的海嘯已經迫在眉睫：到 2029 年，生成式 AI（Generative AI）將吞噬傳統電視廣告收入的近 45%。這不是演習，而是傳統媒體生態的全面崩塌。與此同時，Analytic Partners 的《抵禦經濟衰退的規則》報告指出了一個殘酷的「行動成本」：當競爭對手在市道波動時選擇倍增行銷投資，而你依然執著於 BAU 模式，你將平均損失 15% 的 *market share*。面對咁大嚿數據，點解仲有人可以坐喺度扮睇唔到？原因得一個：驚。
+
+講到底，BAU 之所以仲有咁大市場，係因為佢係一塊好好用嘅「遮醜布」。好多廣告人面對 *Generative AI* 同新規則嘅時候，潛意識入面其實驚到要死，驚自己被時代遺棄，於是寧願匿返入舒適圈，用「慣例」來掩飾低效率嘅工作流程同埋不斷內耗嘅創意產出。香港廣告界有一種根深蒂固嘅「圍威喂」小圈子文化，大家習慣「食老本」，將一啲不痛不癢、純粹追求「品牌好感度」嘅廣告奉為圭臬，互相圍爐取暖。對比國外案例，例如 Burger King 當年推出「Moldy Whopper」（發霉華堡），公然違反「食物廣告一定要影到好好食」嘅金科玉律。雖然畫面極端，但結果卻換來 14% 的銷售增長，以及高達 4,000 萬美元的 *earned media* 價值。這種打破常規的勇氣，正正係商業有用性（Business Usefulness）的體現。反觀本地市場，太多代理商只敢交垃圾行貨，追求安全感多過追求實效。等住入博物館。係咪？
+
+這種所謂的「安全感」，正將本地創意推向邊緣化。正如李奧貝納董事總經理黃麗燕所言，「現在不是台灣人跟台灣人競爭，是台灣人跟世界各地的人競爭。」香港亦然。當國際客戶開始繞過本地代理商，直接透過 *Meta Advantage+* 或 *Google Performance Max* 進行自動化投放，並獲取高達 22% 的投資報酬率（ROI）增長時，傳統創意代理商若只靠那種「我覺得幾好呀」的直覺來維持生計，處境將會非常尷尬。如果本地創意人無法從純粹的小聰明轉化為具備戰略價值的解決方案，你同 AI 平台之間嘅分別只係你收得貴啲，但效率低啲。如果唔想被邊緣化，就必須明白 *Brand Likability* 往往只係自圓其說，真正的創意應該係解決商業問題的利刃。
+
+作為一個誠實的批評者，我提出問題，就一定要交出解決方案。要打破 BAU 的死局，品牌必須從「追逐流量」轉向「定義文化角色」。創意不應只是精心包裝的 *gimmick*，而是經過包裝的 *common sense*。以杜蕾斯（Durex）為例，與其繼續玩那些令人聯想到性騷擾的啜核 sex jokes，不如轉向「Classy Marketing」。杜蕾斯母公司 Reckitt 的戰略轉向極具啟發性：他們意識到真正的對手不是另一個避孕套品牌，而是口服避孕藥。透過攻擊避孕藥可能帶來的頭痛、噁心等副作用，打出「Be a man. Love your woman.」的口號，將品牌提升到保護女性健康的高度。這就是 Madman 提倡的解決方案：還原基本步，解決消費者的真實痛點。
+
+同樣地，佐賀縣推出的《23 點的佐賀飯》亦是數據與心理學結合的典範。他們利用「Sonic Seasoning」的聲音心理學，刻意選擇在深夜 11 點、人類因倦意導致判斷力下降的時刻，播出生動的美食動畫與音效，精準打擊受眾。這種針對人類本能的精準調度，遠比隨便拍一個 meme 帖文來得有效。代理商內部亦應引入像 Duolingo 般的「99 Bad Ideas」文化，鼓勵員工在低成本的環境下大膽實驗。好點子通常在爛主意中誕生，如果你連試錯的膽量都冇，你憑咩覺得自己仲有創意？
+
+沒有死掉的行業，只有死掉的公司。廣告業的本質從未改變，我們依然在處理人的心理與商業的邏輯。但在這個數據主宰、技術顛覆的時代，如果你仲諗住用尋日嗰套邏輯嚟贏聽日場仗，呢種幻想不單止係天真，簡直係玩火。今日返去睇下你個 *campaign plan*，如果入面仲係充滿住嗰啲不痛不癢嘅 *safe move*，我建議你直接撕碎佢。你而家份 plan，係想救返間公司，定係想同間公司一齊陪葬？
+
+重新開波。</div>
+    </div></div>
+  <div class="ver-dots editor-dots"></div>
+  <div class="fc-row fact-row"><button class="btn btn-ghost btn-sm" onclick="runFactcheck('business-as-usual-is-a-dangerous-fantasy-for-adver',this)">🔍 核對資料</button><span class="fc-hint fact-hint">出街前查證國際數據/人事</span></div>
+  <details class="src-panel source-panel">
+    <summary onclick="loadSources('business-as-usual-is-a-dangerous-fantasy-for-adver')">🔍 揀 Source 重寫</summary>
+    <div id="src-business-as-usual-is-a-dangerous-fantasy-for-adver" class="src-list source-list">載入中…</div>
+    <div class="rewrite-note-row source-note-row">
+      <input type="text" id="note-business-as-usual-is-a-dangerous-fantasy-for-adver" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
+    </div>
+    <button class="btn btn-dark btn-sm" style="margin-top:8px"
+            onclick="rewriteWithSources('business-as-usual-is-a-dangerous-fantasy-for-adver',this)">✍️ 用揀咗嘅 source 重新生文</button>
+  </details>
+  <div class="nblm-actions">
+    <button class="btn btn-dark btn-sm" onclick="saveWP('business-as-usual-is-a-dangerous-fantasy-for-adver',this)">💾 存入 WP 草稿（最新版）</button>
+    <button class="btn btn-ghost btn-sm" onclick="runMulti('business-as-usual-is-a-dangerous-fantasy-for-adver',this)">🔁 試其他 model 寫同一素材</button>
+  </div>
+  
+  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/business-as-usual-is-a-dangerous-fantasy-for-adver/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('business-as-usual-is-a-dangerous-fantasy-for-adver',this)">📁 我已掉好圖 → 出 WP</button></details>
+</div>
+<div class="nblm-card surface-card pad-lg editor-card" id="nblm-back-seat-commentator-and-soccer-is-here">
+  <div class="nblm-header editor-head">
+    <span class="nblm-badge editor-badge">NBLM</span>
+    <span class="nblm-slug editor-slug">back-seat-commentator-and-soccer-is-here</span>
+    
+  </div>
+  <h3 class="nblm-title editor-title">“Back Seat Commentator” and “Soccer is Here”</h3>
+  
+  
+  <div class="ver-track editor-track" id="track-back-seat-commentator-and-soccer-is-here">
+    <div class="ver-panel editor-panel" data-slug="back-seat-commentator-and-soccer-is-here" data-idx="0">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
+        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-06-10T09:05</span></div>
+      <div class="nblm-body editor-body">廣告營銷界有一種病，叫「體育狂熱綜合症」。尤其面對 2026 年全球預期有 60 億人次參與足球盛事嘅大氣候，多數品牌主同廣告佬都會集體失去理智，以為銀彈政策就係王道。
+
+我要強調，體育營銷嘅最高境界，**唔係**賣大製作嘅視覺特效（Big production），**唔係**賣洗腦式嘅品牌曝光（Brand exposure），**而係**賣一種深入骨髓嘅「代入感」。今時今日仲喺度堆砌馬力數據、追求巨星疊羅漢嘅車廠，簡直係停留喺上個世紀。NorCal Toyota（北加州豐田）呢鋪唔賣車，賣人情味，係一種對市場嘅「降維打擊」。將鏡頭由球場收返入車廂後座，呢種策略先至係識行人之舉。唔通有大錢就一定要拍到好似荷里活大片咁先叫好廣告？係咪？
+
+今次 NorCal Toyota 聯同 H/L Agency 玩嘅 *Brand positioning* 非常之大膽，亦都非常之精明。傳統汽車廣告嘅邏輯係「車廠行先」，鏡頭永遠捕捉緊車身線條或者引擎性能。但喺《Back Seat Commentator》入面，RAV4 唔再係主角，而係變成一個 *Emotional carrier*（情感載體）。H/L Agency 嘅多元文化營銷副總監 Yunilda Esquivel 講得好中：「足球唔只係嗰 90 分鐘嘅比賽，佢係日常生活中快樂嘅源泉。」
+
+呢種 *Authenticity*（真實性）嘅呈現，比起不斷強調扭力更有感染力。透過一個將後座幻想成足球評述席嘅小男孩，品牌成功反映咗 *how fans engage with the sport outside the stadium*。將產品「隱去」嚟成就故事，反而令品牌更加無處不在。相當大膽，但極之準確。
+
+放眼國際，多數品牌仲係「自嗨」緊。好似內地 Nike 嗰輯《全憑我敢》，大玩 2033 年國足稱霸世界嘅幻想敘事，離地到離晒大譜；又或者好似 TUMI 搵孫興慜影嗰種廣告，雖然係 *Documentary style* 展現血淚訓練，但始終係巨星視角。就算係做得比較出色嘅日本 Indeed「堂安律，你不是一個人」企劃，雖然將視角轉向幕後支持團隊（Support staff），但依然停留喺職業賽事嘅框架內。
+
+Toyota 聰明在於佢捕捉嘅係「快樂片段」（Intimate moments of joy）。對於西班牙裔市場（Hispanic market）嚟講，足球係一種家庭連結。Toyota 唔去賣宏大嘅稱霸夢想，亦唔賣職業背後嘅辛酸，佢賣嘅係「陪你追逐熱情」嘅夥伴關係。呢種價值翻轉，正正係因為佢哋明白，日常嘅微小感動比遠大嘅幻想更有滲透力。
+
+從 *Production Logic* 角度睇，呢輯片最精彩嘅地方唔係畫面，而係聲音設計（Sound Design）。學術上有所謂「*Sonic seasoning*」，講緊聲音點樣影響人嘅大腦感知。導演利用小男孩充滿激情嘅旁白，建構出一種「無形敘事」。你雖然只係見到兩仔爺喺架車入面，但聽住男孩口中嘅球賽評述，觀眾大腦會自動補完一個熱血沸騰嘅萬人球場。
+
+呢種係極高層次嘅 *Craft*。單憑把聲就建構出成個球場嘅張力，呢啲咪叫功力。比起用 CGI 堆砌一個假球場，呢種做法成本更低，但效果更入肉，達成咗一種「*Premium Authenticity*」。
+
+如果將呢套概念引入香港，絕對有排玩。香港有一套極其深厚且獨特嘅廣東話足球文化，呢啲係外國人永遠學唔到嘅「神髓」。與其搵球星喺茶餐廳嗌「入波」，香港 Toyota 倒不如拍一輯更在地嘅提案：捕捉一個「太古城阿爸」開車送個仔去青衣修頓或者摩士公園踢校隊，阿爸一路揸住部 Noah，一路用佢嗰套「講波佬」口吻旁述個仔嘅表現。
+
+「哎呀！呢球係醫院波呀！」、「好彩無炒芥蘭！」或者「呢個插花假動作呃晒成隊人喎！」將嗰種日常嘅父子反差萌，透過廣東話術語呈現出嚟。香港品牌最缺乏嘅就係呢種從日常尋找熱情嘅策略。講一個令香港人會心微笑嘅後座故事，比起硬銷零息供車，品牌層次高得多。
+
+呢個企劃喺 Ads of the World 攞到 30 分，甚至入圍 Clio Awards，實至名歸。最值得讚許嘅係品牌嘅誠實度（*Brand honesty*）。作為行業領導者，敢於將焦點放喺車廂內嘅親子互動，而非車輛外觀，呢種自信先至係最值錢。體育營銷唔應該只係一場預算競賽，而應該係一場對「人性」嘅深刻洞察。
+
+廣告究竟係賣產品，定係賣一種生活方式？
+
+答案就喺後座。</div>
+    </div></div>
+  <div class="ver-dots editor-dots"></div>
+  <div class="fc-row fact-row"><button class="btn btn-ghost btn-sm" onclick="runFactcheck('back-seat-commentator-and-soccer-is-here',this)">🔍 核對資料</button><span class="fc-hint fact-hint">出街前查證國際數據/人事</span></div>
+  <details class="src-panel source-panel">
+    <summary onclick="loadSources('back-seat-commentator-and-soccer-is-here')">🔍 揀 Source 重寫</summary>
+    <div id="src-back-seat-commentator-and-soccer-is-here" class="src-list source-list">載入中…</div>
+    <div class="rewrite-note-row source-note-row">
+      <input type="text" id="note-back-seat-commentator-and-soccer-is-here" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
+    </div>
+    <button class="btn btn-dark btn-sm" style="margin-top:8px"
+            onclick="rewriteWithSources('back-seat-commentator-and-soccer-is-here',this)">✍️ 用揀咗嘅 source 重新生文</button>
+  </details>
+  <div class="nblm-actions">
+    <button class="btn btn-dark btn-sm" onclick="saveWP('back-seat-commentator-and-soccer-is-here',this)">💾 存入 WP 草稿（最新版）</button>
+    <button class="btn btn-ghost btn-sm" onclick="runMulti('back-seat-commentator-and-soccer-is-here',this)">🔁 試其他 model 寫同一素材</button>
+  </div>
+  
+  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/back-seat-commentator-and-soccer-is-here/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('back-seat-commentator-and-soccer-is-here',this)">📁 我已掉好圖 → 出 WP</button></details>
+</div>
+<div class="nblm-card surface-card pad-lg editor-card" id="nblm-suntory-nope-countering-sales-skepticism">
+  <div class="nblm-header editor-head">
+    <span class="nblm-badge editor-badge">NBLM</span>
+    <span class="nblm-slug editor-slug">suntory-nope-countering-sales-skepticism</span>
+    
+  </div>
+  <h3 class="nblm-title editor-title">Suntory 新飲品 NOPE 被指「靠出貨量造市」，品牌如何用數據反擊網絡負評？</h3>
+  
+  
+  <div class="ver-track editor-track" id="track-suntory-nope-countering-sales-skepticism">
+    <div class="ver-panel editor-panel" data-slug="suntory-nope-countering-sales-skepticism" data-idx="0">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
+        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-06-07T01:47</span></div>
+      <div class="nblm-body editor-body">如果你仲信「五十日內出貨 5,500 萬支」呢類官方新聞稿數字代表市場勝利，你一係就係入世未深嘅 Trainee，一係就係畀人呃咗好耐嘅 Client。喺資深廣告人眼中，Shipment 呢家嘢，只要大財團肯砸錢硬塞落零售渠道，要造出「令和史上最速」嘅虛火根本冇難度。呢種由強大資源堆砌出嚟嘅 Awareness，只係一種霸道嘅貨架壓力。當網民紛紛喺社交媒體開火，質疑「其實賣唔郁」、「只係靠鋪貨多」嘅時候，呢場看似公關災難嘅開局，究竟係 Suntory 玩大咗，定係一場請君入甕嘅數據陷阱？
+
+呢套被日本業界稱為「ゴリ押し」（強推）嘅戰略，骨子裏其實係一套精密嘅「壓力表現設計」（Pressure performance design）。Suntory 唔係傻嘅，佢哋預咗你會鬧。品牌故意喺便利店同超市堆起一座座「碳酸山」，利用壓倒性嘅視覺存在感去建立「感知銷量」（Perception of sales）。當你行入舖頭，周圍都係黑色同洋紅色嘅罐，你會產生一種「好似全世界都飲緊」嘅錯覺。至於嗰種標榜由 99 種水果同香料混搭而成、難以形容嘅口味，本身就係一種 Topic strategy。因為難飲定好飲根本唔係重點，重點係佢夠「怪」，怪到大家一定要買支嚟試，先至可以加入網上嘅討論。呢種由負評堆砌出嚟嘅 Manufactured Authenticity，先至係最高階嘅佈局。唔係勁，係預咗你鬧。
+
+但係，要玩「造市」呢種任性嘅遊戲，你背後一定要有數據包底。當網絡輿論開始發酵，質疑 NOPE 係靠谷數嘅時候，Suntory 隨即搬出第三方機構 Catalina Marketing Japan 嘅 Retail audit 數據。數據顯示，NOPE 喺加盟零售店嘅樽裝碳酸飲品類別入面，竟然連續 4 週蟬聯銷量第一。更硬淨嘅係，喺 Suntory 自家 47 款產品嘅自動販賣機排名入面，NOPE 同樣穩守 Top 5，仲要係含糖飲品同碳酸飲品嘅雙料冠軍。呢啲 3rd party data 係最有力嘅反擊，當你仲以為人哋係虛火，人哋已經用實際嘅 Conversion 同你講，呢場係實打實嘅數據勝仗。最妙嘅「Common Sense」細節，係佢哋識得用「買一送一」券，用健康嘅 Suntory Tennensui 天然水做釣餌，去推呢支邪惡嘅碳酸飲品。呢種誠實度判斷，先係實戰 Logic。
+
+然而，呢場戰役最令廣告人「如夢初醒」嘅發現，係數據揭示咗一個南轅北轍嘅 Target audience。Suntory 原本想吸納 20 至 30 歲、想「溶解壓力」嘅年輕人，但數據一出，發現真正嘅 Heavy user 竟然係 40 至 60 歲嘅中年男人。而且年紀愈大，買得愈多。呢班男人對價值 4.1 兆日元嘅「罪惡感消費」（Guilty Food）市場有極大需求。呢支嘢對佢哋嚟講，唔係普通汽水，而係一種對抗枯燥生活嘅英雄式解脫。原本嘅 Marketing brief 雖然偏咗，但數據幫品牌執返劑好藥，發現咗一個更肥美嘅市場缺口。
+
+返返嚟香港，如果你想學 Suntory 玩呢套「造市」戰術，我勸你先照照鏡。香港市場最致命嘅缺點，就係缺乏類似 Catalina 呢類強大且具公信力嘅第三方零售數據環境。喺香港，品牌玩「強推」往往變成單純嘅「谷數」，最後數據唔湯唔水，只會變成真正嘅 PR disaster。冇數據包底嘅任性，最後只會剩返一大堆過期貨同一個臭晒嘅 Brand image。日清或者元氣森林可以玩得咁進取，係因為人哋背後有一套數字體系。喺呢行，谷得靚，就係營銷；谷唔靚，就係公關災難。袋錢入你袋，唔好執輸。
+
+如果呢個 Brief 交畀我寫，我唔會再同你講咩罪惡監獄，我會直接戳破中年男人嗰層壓抑。我會寫一段 Long copy：
+
+你學識咗妥協。為咗體檢報告，你戒咗甜；為咗升職加薪，你戒咗情緒。每日收工，望住鏡入面嗰個「模範男人」，你唔覺得悶咩？NOPE 呢 99 種亂七八糟、混亂到極點嘅味道，先至係你唯一可以掌控嘅真實。呢三分鐘，唔好做個好男人，做返個會貪心、會口渴、會任性嘅普通人。呢一啖，係你對呢個無聊世界嘅一聲反抗。放下罪惡感，因為你絕對值得。
+
+呢種文案，先係將「壓力溶解」昇華為「人情味」嘅關鍵。
+
+數據營銷嘅真諦，從來唔係為咗喺報表上面炫耀嗰幾千萬支出貨量，而係要喺眾聲喧嘩、充滿懷疑嘅年代，為品牌買返一份名副其實嘅尊重。
+
+有數據包底嘅任性，先叫戰略。係咪？</div>
+    </div></div>
+  <div class="ver-dots editor-dots"></div>
+  <div class="fc-row fact-row"><button class="btn btn-ghost btn-sm" onclick="runFactcheck('suntory-nope-countering-sales-skepticism',this)">🔍 核對資料</button><span class="fc-hint fact-hint">出街前查證國際數據/人事</span></div>
+  <details class="src-panel source-panel">
+    <summary onclick="loadSources('suntory-nope-countering-sales-skepticism')">🔍 揀 Source 重寫</summary>
+    <div id="src-suntory-nope-countering-sales-skepticism" class="src-list source-list">載入中…</div>
+    <div class="rewrite-note-row source-note-row">
+      <input type="text" id="note-suntory-nope-countering-sales-skepticism" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
+    </div>
+    <button class="btn btn-dark btn-sm" style="margin-top:8px"
+            onclick="rewriteWithSources('suntory-nope-countering-sales-skepticism',this)">✍️ 用揀咗嘅 source 重新生文</button>
+  </details>
+  <div class="nblm-actions">
+    <button class="btn btn-dark btn-sm" onclick="saveWP('suntory-nope-countering-sales-skepticism',this)">💾 存入 WP 草稿（最新版）</button>
+    <button class="btn btn-ghost btn-sm" onclick="runMulti('suntory-nope-countering-sales-skepticism',this)">🔁 試其他 model 寫同一素材</button>
+  </div>
+  
+  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/suntory-nope-countering-sales-skepticism/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('suntory-nope-countering-sales-skepticism',this)">📁 我已掉好圖 → 出 WP</button></details>
+</div>
+<div class="nblm-card surface-card pad-lg editor-card" id="nblm-osaka-expo-myakumyaku-photobook">
+  <div class="nblm-header editor-head">
+    <span class="nblm-badge editor-badge">NBLM</span>
+    <span class="nblm-slug editor-slug">osaka-expo-myakumyaku-photobook</span>
+    
+  </div>
+  <h3 class="nblm-title editor-title">吉祥物都要出「G-Gravure」？大阪萬博 Myaku-Myaku 寫真集背後嘅 IP 續命術</h3>
+  
+  
+  <div class="ver-track editor-track" id="track-osaka-expo-myakumyaku-photobook">
+    <div class="ver-panel editor-panel" data-slug="osaka-expo-myakumyaku-photobook" data-idx="0">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
+        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-06-07T01:58</span></div>
+      <div class="nblm-body editor-body">唔係惡搞，唔係 PR 老烏，更加唔係啲後生仔一時興起玩自嗨。大阪萬博吉祥物 Myaku-Myaku 推出首本個人寫真集《I myaku you.》，喺外行人眼中係一場荒謬嘅 PR Stunt，但喺行內人眼中，呢場由電通（Dentsu）操刀嘅 Campaign，係一次精準到極致嘅 IP 續命術。好多人笑呢隻嘢設計「崩壞」，但廣告人睇到嘅，係點樣透過一個大膽嘅 Tactical Rollout，將一個官方符號轉化為具有商業自循環能力嘅 Brand asset。呢單嘢唔係要挑戰大眾審美，而係展示緊一種將 IP 人格化到極致、甚至帶點瘋狂嘅商業邏輯。
+
+講返轉頭，Myaku-Myaku 喺 2022 年剛公開由山下浩平（Kohei Yamashita）設計嘅形象時，輿論簡直係一場 Brand suicide。被網民瘋狂嫌棄「噁心」、「可怕」，甚至有人話見到佢就要行「SAN 值 Check」。但電通嘅創意總監堀晴幸（Horu Haruyuki）非常清醒，佢哋知道喺「可愛吉祥物」飽和到嘔嘅日本市場，平庸即係死罪。佢哋利用 Myaku-Myaku 本身獵奇嘅細胞形態，行一條由「醜萌」到「反差萌」嘅人格化路徑。推出「本格偶像寫真集 (本格グラビア)」呢種 Media format，就係要將一個冷冰冰嘅官方標誌，強行賦予一個「演藝偶像」嘅魂魄。當一個被標籤為「怪物」嘅符號，喺沖繩陽光下起床、喺沙灘曬日光浴，甚至躲在薄紗窗簾後展現所謂嘅「女友感」，呢種認知失調產生嘅威力，令佢由負評逆轉為一種 Cult 爆嘅國民寵兒。策略核心唔係要修正美感，而係要用 Media format 嘅錯位去製造震撼，迫使大眾由「嫌棄」轉向「好奇」。
+
+呢單嘢最令廣告人致敬嘅，係電通嗰種「認真玩」嘅 Production logic。如果只係求其影幾張相擺上 Social media，嗰種張力根本唔夠維持長線嘅 Brand equity。製作團隊係真係當佢係一個 A-list 偶像去捧：全書厚達 224 頁，遠赴沖繩進行三日兩夜外景拍攝，定價 3,960 日圓，規格完全對標一線寫真星。執行細節位更加係玩到極致，寫真集裡面包含日本雜誌最誘人嘅「袋とじ（袋裝密封頁）」，呢種常見於成人或偶像刊物嘅設計，象徵住「禁忌」與「私密」，用喺一個官方吉祥物身上，簡直係一次絕妙嘅 Subversion of authority。佢哋仲整埋隨機特典小卡，甚至喺東京、大阪、名古屋舉辦實體「手渡會」，由 Myaku-Myaku 親自將書交畀粉絲。呢種 O2O Activation 嘅執行力，將一個原本可能流於低俗嘅 Bad idea，昇華成一個具備 Professional register 嘅品牌範例。
+
+唔好以為呢啲只係創意人嘅自嗨，背後係有紮實嘅 Hard data 支撐呢套粉絲經濟。明明一開始被罵到體無完膚，明明形態扭曲到似外星寄生體，但截至 2025 年 10 月世博閉幕前，相關周邊商品銷售額已經衝破 1,250 億日圓。你要知道，呢類 Licensing revenue 嘅 6% 至 10% 係要上繳，呢筆錢直接推高咗萬博嘅營運盈餘去到 320 億至 370 億日圓。電通選擇喺 2026 年 4 月，即係萬博閉幕半年後、開幕一週年之際推出寫真集，明顯係一場精心計算嘅 Post-Expo survival 策略。對比返熊本熊（Kumamon）11 年間全球累計 1 兆日圓嘅長尾價值，電通呢套寫真集策略，係要確保 Myaku-Myaku 喺世博散場後，依然可以憑住「個人偶像」嘅身分喺市場收割，唔會變成用完即棄嘅 Event legacy。
+
+對比返香港嘅情況，我哋唔係冇出色嘅形象，例如「任何仁」或者「大嘥鬼」，但香港品牌方嘅死穴在於，我哋好叻做低成本爆紅嘅小聰明，卻缺乏一種追求 High-end execution 嘅骨氣。如果香港有官方吉祥物想拍呢類「性感寫真集」，信我，未出門口已經被客嗰邊嘅 Compliance 同 Legal 部門落閘，又或者因為怕被網民話「浪費公帑」而縮沙。香港廣告圈長期沉溺於追求 Viral vanity metrics，覺得一個 Post 有幾萬個 Like 就叫成功；但日本電通展示嘅係 Long-tail ROI，係點樣說服一個嚴肅嘅官方機構，容許一個「擦邊球」甚至怪誕嘅創意落地，並將其轉化為真實嘅銷售額。香港欠缺嘅唔係創意，而係容許創意變態、成熟、最後變成產業嘅土壤。
+
+Myaku-Myaku 嘅案例話畀大家聽，IP 嘅生命力唔係源自佢有幾「正確」，而係源自佢有幾多「靈魂」。當你認真對待一個虛構角色，用最高規格嘅 Production 去堆砌佢嘅人格，公眾自然會產生情感連結。呢種由獵奇走向國民偶像嘅過程，本質上就係一場對於品牌塑造嘅高級冒險。如果創作人冇咗嗰種「玩認真」嘅傲氣，我哋產出嘅永遠只會係面目模糊嘅宣傳符號，而唔係可以跨越時代、持續收割嘅 IP 資產。
+
+當人哋連一隻「寄生獸」都可以經營成國民偶像，我哋仲喺度執著緊嗰幾粒 Like 同 Share，你係咪真係識玩廣告？</div>
+    </div></div>
+  <div class="ver-dots editor-dots"></div>
+  <div class="fc-row fact-row"><button class="btn btn-ghost btn-sm" onclick="runFactcheck('osaka-expo-myakumyaku-photobook',this)">🔍 核對資料</button><span class="fc-hint fact-hint">出街前查證國際數據/人事</span></div>
+  <details class="src-panel source-panel">
+    <summary onclick="loadSources('osaka-expo-myakumyaku-photobook')">🔍 揀 Source 重寫</summary>
+    <div id="src-osaka-expo-myakumyaku-photobook" class="src-list source-list">載入中…</div>
+    <div class="rewrite-note-row source-note-row">
+      <input type="text" id="note-osaka-expo-myakumyaku-photobook" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
+    </div>
+    <button class="btn btn-dark btn-sm" style="margin-top:8px"
+            onclick="rewriteWithSources('osaka-expo-myakumyaku-photobook',this)">✍️ 用揀咗嘅 source 重新生文</button>
+  </details>
+  <div class="nblm-actions">
+    <button class="btn btn-dark btn-sm" onclick="saveWP('osaka-expo-myakumyaku-photobook',this)">💾 存入 WP 草稿（最新版）</button>
+    <button class="btn btn-ghost btn-sm" onclick="runMulti('osaka-expo-myakumyaku-photobook',this)">🔁 試其他 model 寫同一素材</button>
+  </div>
+  
+  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/osaka-expo-myakumyaku-photobook/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('osaka-expo-myakumyaku-photobook',this)">📁 我已掉好圖 → 出 WP</button></details>
+</div><nav class="quick-nav"><a href="inspiration-6.html">← 上一頁</a><a>第 7 / 7 頁</a></nav></section>
+  
+  
+  <section class="sec-block" id="cand"><div class="sec-head">📰 今日新料 </div><div class="empty-state"></div></section>
+  
+</div>
+<button class="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>廣告狂人內容策展系統 v2</footer>
+<script>
+function loadSources(slug) {
+  var el = document.getElementById('src-' + slug);
+  if (el && el.dataset.loaded) return;
+  fetch('http://127.0.0.1:8898/nb_sources?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok) { el.textContent = '錯誤: ' + (d.error||''); return; }
+      el.dataset.loaded = '1';
+      el.innerHTML = '<div style="font-size:11px;color:var(--sub);margin-bottom:6px">' +
+        'Brand NB: ' + d.brand + ' · ' + d.sources.length + ' 個 source</div>' +
+        d.sources.map(function(s) {
+          var checked = s.title.includes('[ARCHIVE]') || s.title.includes('[AD-RESEARCH]') || s.title.includes('[BRAND]') ? 'checked' : 'checked';
+          return '<label class="src-item"><input type="checkbox" ' + checked +
+            ' data-sid="' + s.id + '" data-slug="' + slug + '">' +
+            '<span class="src-type">' + (s.stype||'?') + '</span>' +
+            '<span>' + (s.clean||s.title||'').substring(0,80) + '</span></label>';
+        }).join('');
+    })
+    .catch(e => { el.textContent = 'Listener 未開: ' + e.message; });
+}
+
+function rewriteWithSources(slug, btn) {
+  var checked = document.querySelectorAll('input[data-slug="' + slug + '"]:checked');
+  var ids = Array.from(checked).map(function(cb) { return cb.dataset.sid; });
+  if (ids.length === 0) { alert('要至少揀一個 source'); return; }
+  var noteEl = document.getElementById('note-' + slug);
+  var note = noteEl ? noteEl.value.trim() : '';
+  var url = 'http://127.0.0.1:8898/write_nblm?slug=' + encodeURIComponent(slug) + '&src=' + ids.join(',');
+  if (note) url += '&note=' + encodeURIComponent(note);
+  btn.disabled = true; btn.textContent = '⏳ 生文中…新版會出喺最左';
+  fetch(url)
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 生文緊 — 完成後 reload 睇新版'; }
+      else { btn.disabled=false; btn.textContent='✍️ 用揀咗嘅 source 重新生文'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='✍️ 用揀咗嘅 source 重新生文'; alert(e.message); });
+}
+
+// carousel: 載入時強制去最左（最新版），scroll 時更新 dot
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.ver-track').forEach(function(track) {
+    track.scrollLeft = 0;  // 預設最新版（index 0，最左）
+    var card = track.closest('.nblm-card');
+    var dots = card ? card.querySelectorAll('.ver-dot') : [];
+    if (!dots.length) return;
+    dots.forEach(function(d, i) { d.classList.toggle('on', i === 0); });
+    track.addEventListener('scroll', function() {
+      var idx = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach(function(d, i) { d.classList.toggle('on', i === idx); });
+    });
+  });
+});
+
+function runFactcheck(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 查證中… Gemini掃+sonar覆查 約 2 分鐘';
+  fetch('http://127.0.0.1:8898/factcheck?slug=' + encodeURIComponent(slug) + '&cross=1')
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 查緊 — 完成後 reload 睇結果'; }
+      else { btn.disabled=false; btn.textContent='🔍 核對資料'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='🔍 核對資料'; alert('Listener 未開: '+e.message); });
+}
+
+function saveWP(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 入 WP…';
+  fetch('http://127.0.0.1:8898/save_wp?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 入咗 WP 草稿'; }
+      else { btn.disabled=false; btn.textContent='💾 存入 WP 草稿'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='💾 存入 WP 草稿'; alert('Listener 未開: '+e.message); });
+}
+
+function saveWPManual(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 配圖出 WP…';
+  fetch('http://127.0.0.1:8898/save_wp_manual?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 已觸發（' + d.imgs + ' 張）— 完成後 reload 睇 WP 草稿'; }
+      else { btn.disabled=false; btn.textContent='📁 我已掉好圖 → 出 WP'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='📁 我已掉好圖 → 出 WP'; alert('Listener 未開: '+e.message); });
+}
+
+function copyText(slug, btn) {
+  var ta = document.getElementById('cp-' + slug);
+  if (!ta) return;
+  navigator.clipboard.writeText(ta.value).then(function() {
+    btn.textContent = '✅ Copy 咗 — 直接貼 IG/Threads';
+  }, function() {
+    ta.style.position = 'static'; ta.style.height = 'auto'; ta.select();
+    document.execCommand('copy'); btn.textContent = '✅ Copy 咗';
+  });
+}
+
+function runMulti(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 跑緊… 等 WhatsApp 通知';
+  fetch('http://127.0.0.1:8898/write_multi?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 已觸發 — 完成後 reload 睇 AI 擂台'; }
+      else { btn.disabled=false; btn.textContent='🔁 試其他 model 寫同一素材'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='🔁 試其他 model 寫同一素材'; alert('Listener 未開: '+e.message); });
+}
+
+function triggerWrite(slug, btn) {
+  if (!slug) return;
+  btn.disabled = true;
+  btn.textContent = '⏳ 寫緊… 5-8 分鐘後 WhatsApp 通知';
+  fetch('http://127.0.0.1:8898/write?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) {
+        btn.textContent = '✅ 已觸發 — 等 WhatsApp 通知';
+      } else {
+        btn.disabled = false;
+        btn.textContent = '✍️ 出呢篇';
+        alert('Error: ' + (d.error || JSON.stringify(d)));
+      }
+    })
+    .catch(e => {
+      btn.disabled = false;
+      btn.textContent = '✍️ 出呢篇';
+      alert('Listener 未開: ' + e.message);
+    });
+}
+
+</script>
+</body>
+</html>
