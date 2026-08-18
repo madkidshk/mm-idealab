@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="zh-HK">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>廣告狂人 · 內容策展</title>
+<style>
+:root {
+  --bg: #F2F2F7;
+  --card: #FFFFFF;
+  --ink: #1C1C1E;
+  --sub: #8E8E93;
+  --line: #D1D1D6;
+  --red: #EE382F;
+  --red-bg: #FFF3F2;
+  --blue: #007AFF;
+  --green: #34C759;
+  --r: 16px;
+  --r-sm: 10px;
+  --shadow: 0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box}
+.btn{background:#4f46e5;color:#fff;border:none;border-radius:9px;padding:8px 13px;font-size:12.5px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:#fff;color:#4f46e5;border:1.5px solid #dcdffb}
+.btn.grn{background:#15a34a}
+.btn.mini{padding:4px 9px;font-size:11px}
+.btn:hover,.btn.ghost:hover{filter:brightness(.98)}
+details.soft{background:#fff;border:1px solid #e7e9ee;border-radius:10px;padding:4px 12px}
+details.soft>summary{cursor:pointer;font-size:12.5px;font-weight:700;color:#444;padding:8px 0;list-style:none}
+details.soft>summary::-webkit-details-marker{display:none}
+details.soft>summary::before{content:"▸ ";color:#9aa0ab}
+details.soft[open]>summary::before{content:"▾ "}
+.card{background:#fff;border:1px solid #e7e9ee;border-radius:14px;padding:15px 17px;box-shadow:0 1px 2px rgba(20,24,40,.04),0 4px 14px rgba(20,24,40,.05)}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:#eef0f3;color:#555}
+.pill.ok{background:#e7f7ee;color:#15803d}
+.pill.warn{background:#fff4e5;color:#b45309}
+.pill.bad{background:#fdeaea;color:#dc2626}
+.pill.accent{background:#eef0fe;color:#4f46e5}
+.secthead{font-size:16px;font-weight:800;margin:24px 0 10px;border-left:4px solid #4f46e5;padding-left:9px;color:#1b1f27}
+.secthead.tight{margin-top:10px}
+.sectbadge{display:inline-block;margin-left:8px;font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px;background:#eef0fe;color:#4f46e5}
+.carousel{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 12px;-webkit-overflow-scrolling:touch}
+.carousel::-webkit-scrollbar{height:6px}
+.carousel::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:6px}
+.carousel-card{flex:0 0 88%;max-width:340px;scroll-snap-align:center;scroll-snap-stop:always;background:#fff;border:1.5px solid #e7e9ee;border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(20,24,40,.05),0 6px 18px rgba(20,24,40,.07)}
+@media(min-width:700px) and (max-width:1099px){.carousel-card{flex:0 0 46%}}
+@media(min-width:1100px){.carousel{flex-wrap:wrap;overflow-x:visible;scroll-snap-type:none;gap:14px}.carousel-card{flex:0 0 calc(33.333% - 10px);max-width:none;scroll-snap-align:none}}
+.badge{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#4f46e5;border-radius:7px;padding:2px 9px;letter-spacing:.02em}
+.score-badge{display:inline-block;background:#c79a2b;color:#fff;font-size:12px;font-weight:800;border-radius:20px;padding:2px 10px}
+.status-badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:2px 7px}
+.status-badge.ok{background:#dcfce7;color:#15803d}
+.status-badge.warn{background:#fef3c7;color:#a16207}
+.status-badge.bad{background:#fee2e2;color:#b91c1c}
+.status-badge.mute{background:#eef0f3;color:#717784}
+.surface-card{background:#fff;border:1px solid #e7e9ee;border-radius:14px;box-shadow:0 1px 2px rgba(20,24,40,.05),0 6px 18px rgba(20,24,40,.07)}
+.surface-card.soft{background:#fafbfd}
+.surface-card.warn{background:#fff8f1;border-color:#fcd9b6}
+.surface-card.danger{border-color:#f3b4ae;box-shadow:0 2px 16px rgba(238,56,47,.08)}
+.surface-card.pad-sm{padding:9px 10px}
+.surface-card.pad-md{padding:15px 17px}
+.surface-card.pad-lg{padding:18px}
+.surface-card.selected{border-color:#4f46e5;box-shadow:0 0 0 2px rgba(79,70,229,.25),0 6px 18px rgba(79,70,229,.18)}
+.monitor-wrap{margin-bottom:12px}
+.mon-title{font-size:13px;font-weight:800;color:#1f2937;margin:0 0 8px}
+.mon-row{background:#fff;border:1px solid #e7e9ee;border-radius:12px;margin-bottom:8px;overflow:hidden}
+.mon-row>summary{display:flex;align-items:center;gap:8px;padding:11px 14px;cursor:pointer;list-style:none;user-select:none;font-size:13px;font-weight:700;color:#1f2937}
+.mon-row>summary::-webkit-details-marker{display:none}
+.mon-row[open]>summary{border-bottom:1px solid #eef0f3;background:#fafbfd}
+.mon-badge{margin-left:auto;display:inline-block;font-size:11px;font-weight:800;color:#fff;background:#4f46e5;border-radius:999px;padding:2px 8px}
+.mon-list{margin:0;padding:8px 14px 12px 30px;font-size:12.5px;color:#4b5563}
+.mon-list li+li{margin-top:6px}
+.review-list{padding:4px 0;border-top:1px solid #e7e9ee}
+.review-row{border-bottom:1px solid #e7e9ee}
+.review-row:last-child{border-bottom:none}
+.review-row>summary{display:flex;align-items:center;gap:8px;padding:11px 18px;cursor:pointer;list-style:none;user-select:none}
+.review-row>summary::-webkit-details-marker{display:none}
+.review-medal{font-size:16px}
+.review-label{font-size:14px;font-weight:600;flex:1}
+.review-score{font-size:13px;font-weight:700;color:#717784;background:#f4f5f7;border-radius:20px;padding:2px 10px}
+.review-body{padding:6px 18px 14px}
+.review-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.info-card{margin-bottom:12px}
+.info-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.info-title{font-size:16px;font-weight:800;line-height:1.4;margin-bottom:7px}
+.info-meta{display:flex;gap:5px;flex-wrap:wrap}
+.meta-tag{background:#f4f5f7;border:1px solid #e7e9ee;color:#717784;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:6px}
+.info-strip{font-size:12px;color:#0891b2;background:#ecfeff;border-radius:7px;padding:4px 9px;margin-bottom:8px}
+.info-block{font-size:13.5px;color:#39414e;margin-bottom:6px;line-height:1.55}
+.info-callout{background:#fff7f6;border-left:3px solid #dc2626;padding:6px 10px;border-radius:6px}
+.info-key{font-weight:700;color:#1b1f27;margin-right:5px}
+.info-foot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12.5px}
+.info-link{color:#007aff;font-weight:600}
+.info-code{font-family:monospace;color:#717784;font-size:11.5px}
+.cal-card{border-left:4px solid #dc2626}
+.cal-row{font-size:14px;font-weight:600;color:#1b1f27;margin-bottom:4px}
+.cal-tag{display:inline-block;background:#dc2626;color:#fff;font-size:12px;font-weight:700;border-radius:6px;padding:1px 8px;margin-left:4px}
+.cal-none{color:#717784;font-weight:400}
+.cal-sub{font-size:12.5px;color:#555;margin-top:4px}
+.cal-mute{color:#717784}
+.fact-box{margin:10px 0;border:1px solid #e7e9ee;border-radius:10px;padding:9px 11px;background:#fafafb}
+.fact-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.fact-pill{font-size:12px;font-weight:800;border-radius:20px;padding:1px 8px}
+.fact-pill.ok{background:#e7f7ec;color:#1a7f37}
+.fact-pill.bad{background:#fde7e7;color:#c81e1e}
+.fact-pill.unv{background:#fff4e0;color:#b45309}
+.fact-pill.mute{background:#f4f5f7;color:#717784}
+.fact-hint{font-size:11px;color:#717784}
+.fact-detail{margin-top:7px}
+.fact-detail>summary{font-size:12px;font-weight:600;color:#007aff;cursor:pointer}
+.fact-flag{font-size:12.5px;margin:6px 0;padding:6px 9px;border-radius:7px;line-height:1.5}
+.fact-flag.bad{background:#fdecec;border-left:3px solid #c81e1e}
+.fact-flag.unv{background:#fff7ea;border-left:3px solid #b45309}
+.fact-correct{color:#1a7f37;font-size:12px;margin-top:3px}
+.fact-note{color:#717784}
+.fact-cross{font-size:11.5px;color:#5b6472;margin-top:4px;padding-top:4px;border-top:1px dashed #e7e9ee}
+.fact-allok{font-size:12.5px;color:#1a7f37;font-weight:600}
+.cta-primary{display:block;width:100%;margin-top:12px;background:#1c1c1e;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;padding:11px;cursor:pointer;font-family:inherit}
+.cta-primary:hover{background:#333}
+.cta-primary:disabled{background:#999;cursor:default}
+.cta-banner{display:block;background:linear-gradient(135deg,#111 0%,#333 100%);color:#fff;font-weight:800;font-size:14px;padding:13px 18px;border-radius:10px;text-align:center;margin-bottom:20px;box-shadow:0 3px 12px rgba(0,0,0,.15)}
+.source-panel{margin:10px 0;border:1px solid #e7e9ee;border-radius:10px;padding:8px 12px;background:#fff}
+.source-panel>summary{cursor:pointer;font-size:13px;font-weight:600;color:#007aff;list-style:none}
+.source-panel>summary::-webkit-details-marker{display:none}
+.source-list{margin:8px 0}
+.source-item{display:flex;align-items:flex-start;gap:7px;padding:4px 0;font-size:12.5px;border-bottom:1px solid #e7e9ee}
+.source-item:last-child{border-bottom:none}
+.source-item input{margin-top:2px;flex-shrink:0}
+.source-type{font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;background:#f4f5f7;color:#717784;white-space:nowrap}
+.source-note-row{margin:8px 0 0}
+.source-note{width:100%;border:1px solid #e7e9ee;border-radius:10px;padding:8px 10px;font-size:13px;font-family:inherit}
+.source-note:focus{outline:2px solid #007aff;border-color:transparent}
+.editor-card{border-left:4px solid #7c3aed}
+.editor-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.editor-badge{display:inline-block;background:#7c3aed;color:#fff;font-size:11px;font-weight:800;border-radius:20px;padding:2px 9px}
+.editor-slug{font-size:11px;color:#717784;font-family:monospace}
+.editor-title{font-size:17px;font-weight:800;line-height:1.4;margin-bottom:12px}
+.editor-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding-bottom:4px;margin-bottom:6px}
+.editor-track::-webkit-scrollbar{height:0}
+.editor-panel{flex:0 0 100%;min-width:100%;scroll-snap-align:start}
+.editor-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.editor-note{font-size:12px;color:#1b1f27;font-weight:600}
+.editor-ts{font-size:11px;color:#717784;font-family:monospace;margin-left:auto}
+.editor-hint{font-size:11px;color:#7c3aed;font-weight:600;margin-left:auto}
+.editor-dots{display:flex;gap:6px;justify-content:center;margin-bottom:10px}
+.editor-dot{width:7px;height:7px;border-radius:50%;background:#e7e9ee;transition:background .2s}
+.editor-dot.on{background:#7c3aed}
+.editor-body{font-size:14px;line-height:1.8;color:#39414e;white-space:pre-wrap;max-height:420px;overflow-y:auto;border:1px solid #e7e9ee;border-radius:10px;padding:12px 14px;background:#fafafb}
+* { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, "PingFang HK", "Microsoft JhengHei", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 15px;
+}
+a { text-decoration: none; }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: #111; color: #fff;
+  padding: 11px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+}
+.site-title { font-size: 15px; font-weight: 800; letter-spacing: .3px; white-space: nowrap; }
+.site-meta { font-size: 11px; opacity: .5; white-space: nowrap; }
+
+/* Quick nav */
+.quick-nav {
+  display: flex; gap: 6px;
+  padding: 10px 16px 6px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.quick-nav a {
+  display: inline-block;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+.quick-nav a:hover { background: #f0f0f5; }
+
+/* Main wrap */
+.wrap { max-width: 680px; margin: 0 auto; padding: 10px 14px 80px; }
+
+/* Section */
+.sec-block { margin-bottom: 28px; }
+.sec-head {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec-badge {
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 20px;
+  padding: 1px 8px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Buttons */
+.btn {
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 12px;
+}
+.btn-red {
+  background: var(--red);
+  color: #fff;
+}
+.btn-red:hover { background: #d62e26; }
+.btn-ghost {
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { background: var(--line); }
+.btn-sm { font-size: 13px; padding: 7px 14px; }
+
+/* 待出街 card */
+.pub-card {
+  border: 2px solid var(--red);
+  padding: 18px 18px 16px;
+  margin-bottom: 12px;
+}
+.pub-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.pub-byline { font-size: 13px; color: var(--sub); font-weight: 600; }
+.score-chip {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 20px;
+  padding: 1px 9px;
+  margin-left: 6px;
+}
+.slug-tag {
+  font-size: 11px;
+  color: var(--sub);
+  font-family: monospace;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+.pub-title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 4px 0 8px;
+}
+.pub-snippet {
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.55;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* AI 擂台 */
+.arena-block { margin-bottom: 16px; overflow: hidden; }
+.arena-topic {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sub);
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.winner-card { padding: 16px 18px; border-left: 4px solid var(--red); background: var(--red-bg); }
+.winner-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.medal { font-size: 22px; }
+.winner-meta { display: flex; align-items: center; gap: 8px; }
+.winner-label { font-size: 14px; font-weight: 700; color: var(--ink); }
+.winner-meta .score-badge { background: var(--red); font-size: 13px; }
+.winner-title {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+.winner-sub {
+  font-size: 12px;
+  color: var(--sub);
+  margin-bottom: 10px;
+}
+.runners {
+  padding: 4px 0;
+  border-top: 1px solid var(--line);
+}
+/* collapsible inside winner */
+.expand > summary {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  list-style: none;
+  user-select: none;
+}
+.expand > summary::-webkit-details-marker { display: none; }
+
+/* Judge notes */
+.jnotes { background: #F7F7FA; border-radius: var(--r-sm); padding: 10px 12px; margin: 10px 0 6px; }
+.jn {
+  font-size: 12.5px;
+  color: #444;
+  margin-bottom: 7px;
+  line-height: 1.55;
+}
+.jn:last-child { margin-bottom: 0; }
+.jn-judge { color: var(--ink); margin-right: 4px; }
+.jn-taste {
+  background: var(--line);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 11px;
+  color: var(--sub);
+  margin-right: 6px;
+}
+.jn-note { color: #5b6472; }
+.article-pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: #39414e;
+  line-height: 1.75;
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+.no-body { font-size: 13px; color: var(--sub); font-style: italic; margin-top: 6px; }
+
+/* 今日新料 cards */
+.pill {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.cand-card { margin-bottom: 12px; }
+.cand-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.fresh-row { margin-bottom: 8px; }
+
+/* Calendar */
+.cal-card { margin-bottom: 12px; }
+
+/* Monitor */
+.monitor-wrap .mon-title { color: var(--sub); font-weight: 700; }
+.monitor-wrap .mon-badge { background: var(--red); }
+.monitor-wrap .mon-list { list-style: none; }
+.monitor-wrap .mon-list li { border-top: 1px solid var(--line); padding: 6px 0; }
+.mon-list a { display: block; color: var(--blue); font-size: 13px; }
+.mon-date { font-family: monospace; font-size: 11px; color: var(--sub); margin-right: 6px; }
+
+/* Empty / utility */
+.empty-state {
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-sm);
+  text-align: center;
+  padding: 22px;
+  color: var(--sub);
+  font-size: 14px;
+}
+.empty-state code { background: var(--bg); border-radius: 4px; padding: 1px 5px; font-size: 12px; }
+
+/* NBLM / version rail */
+.nblm-card { margin-bottom: 14px; }
+.ver-badge { background: var(--sub); }
+.ver-badge.newest { background: #7C3AED; }
+.ver-dot { background: var(--line); }
+.nblm-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+.multi-done { font-size: 13px; color: var(--green); font-weight: 600; }
+.btn-dark {
+  background: var(--ink); color: #fff;
+}
+.btn-dark:hover { background: #333; }
+.btn-dark:disabled { background: #999; cursor: default; }
+
+/* Back to top */
+.totop {
+  position: fixed;
+  right: 16px; bottom: 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0,0,0,.22);
+}
+
+/* Footer */
+footer { text-align: center; color: var(--sub); font-size: 12px; padding: 18px 0 30px; }
+
+.write-btn{margin-top:12px}
+</style>
+</head>
+<body>
+<!-- generated-by: scripts/core/nlm-bridge/lab_ui_shell.py -->
+<header class="site-header">
+  <span class="site-title">廣告狂人 · 內容策展</span>
+  <span class="site-meta">2026-08-19 · 2026-08-19 06:52</span>
+</header>
+<nav class="quick-nav">
+  <a href="#nblm">🟣 NBLM 底稿</a>
+  
+  
+  
+  
+  <a href="index.html">🏠 總目錄</a>
+</nav>
+<div class="wrap" id="top">
+  
+  <section class="sec-block" id="nblm"><div class="sec-head">🟣 NBLM 底稿 — 睇完先決定（第 3/3 頁 · 共 26 篇） <span class="sec-badge">26</span></div><nav class="quick-nav"><a href="inspiration-2.html">← 上一頁</a><a>第 3 / 3 頁</a></nav>
+<div class="nblm-card surface-card pad-lg editor-card" id="nblm-ai-2026-ai">
+  <div class="nblm-header editor-head">
+    <span class="nblm-badge editor-badge">NBLM</span>
+    <span class="nblm-slug editor-slug">ai-2026-ai</span>
+    <span class="ver-hint editor-hint">← 滑去睇舊版（共 2 版）</span>
+  </div>
+  <h3 class="nblm-title editor-title">私たちはAIで、世界を退屈にしているのか？──カンヌライオンズ2026、AIを切り口に語られた「退屈の正体」と、クリエイターの生存戦略──</h3>
+  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#777;color:#fff;font-size:12px;font-weight:700">🕒 新鮮度待查</span><span style="color:#666;font-size:12px;margin-left:8px">parse fail: 正在查證這則題材的最早報導時間與時效。</span></div>
+  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#7c3aed;color:#fff;font-size:12px;font-weight:700">🔬 研究mode（實時查料 grounding）</span><span style="color:#666;font-size:12px;margin-left:8px">內容涉及 2026 年的活動（未來/最新事件）且包含特定論壇討論，需核實具體數據與細節。</span></div>
+  <div class="ver-track editor-track" id="track-ai-2026-ai">
+    <div class="ver-panel editor-panel" data-slug="ai-2026-ai" data-idx="0">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
+        <span class="ver-note editor-note">執聲(Curation NB)</span><span class="ver-ts editor-ts">2026-07-31T05:59</span></div>
+      <div class="nblm-body editor-body">2026 年嘅康城，成條 La Croisette 街都係 AI。海灘邊嘅酒會大家唔係傾緊邊間 Agency 攞獎，而係 exchange 緊邊個 model 最好用。班老細成班餓狼咁，見到 AI 就以為執到寶，成口術語諗住點樣用 prompt 壓低 production cost，甚至直情想 skip 咗成個 creative process。點知今年康城最入肉嘅一擊，居然係一個咁樣嘅論壇主題：「私たちはAIで、世界を退屈にしているのか？」。問緊我哋係咪變緊做無聊大師。呢個「無聊警報」喺一堆科技狂熱入面顯得特別刺耳，好似一盤冰水淋落去班所謂「AI 專家」個頭度，叫大家醒吓，唔好再沉迷嗰種冇靈魂、FMCG mindset 嘅技術呈現。
+
+點解會有無聊感？因為 AI 嘅 logic 根本就係「平均值陷阱」。所有 algorithm 生成出嚟嘅嘢，都係基於過去數據嘅 safe choice。用 production house logic 嚟講，AI 產量係高，efficiency 係快，但出嚟嘅 generic content 個個都好似工廠倒模咁。AI 嘅優點係「太完美」，而呢種完美正好係創意嘅致命傷。第一次睇 AI 生成三大科技巨人變老或者係驚喜，但好似 AICandy 嗰套 Energym 廣告咁，將 Musk 同 Altman 呢班 AI disrupters 拍成《黑鏡》式恐怖片，直指 2050 年人類會變成 AI 嘅發電「電池」，呢份驚心動魄係因為佢夠寫實、夠諷刺。如果我哋淨係追求 AI 生成嘅完美畫面，而無視咗嗰份對現實嘅冒犯同痛感，創意就變咗大數據嘅囚犯，抹殺晒所有意料之外嘅驚喜。
+
+康城論壇提到「退屈の正体」，即係無聊嘅真相。無聊源於 Predictability（可預測性），人係鍾意 Irregularity（不規則性）。廣告人最自豪嘅 Insight，通常嚟自 AI 捉唔到嘅生活細微掙扎。就好似 Madman Archive 講《碧咸傳》，點解全城都要食花生？唔係因為佢哋家庭完美，而係因為 Studio 99 製作出嚟嗰份「計算過嘅混亂」。世人唔係睇唔出完美形象經過精心設計，但就係鍾意睇嗰種 FOMO 式嘅「真實裂痕」，呢份人性嘅掙扎先至係 Human Connection。或者好似陳豪嗰啲保險廣告，點解咁到肉？因為佢真係演活咗一個一人養全家、充滿真實壓力嘅「顧家好男人」，佢眼神入面嗰份疲累係 AI 永遠模仿唔到嘅，因為 AI 根本唔需要養家。AI 可以模仿 Craft，但佢暫時仲未明咩叫「明就明」嘅共鳴。
+
+面對 AI 浪潮，創意人嘅生存策略係要學識 Embrace the Messiness。唔好諗住同 AI 鬥快，你要鬥嘅係 AI 永遠唔明嘅人情味同埋嗰份質感。我哋要將 AI 當成一個加速執行嘅 tool，而唔係成個 campaign 嘅 soul。就好似當年首席設計師 Pinky Lai 幫保時捷設計 911 996 型號，嗰對「荷包蛋」頭燈當年人人喊打話核突，但其實係一個「絕地求生」嘅慳錢方案，成功令保時捷喺財困中生存落嚟，冇被 Benz 或 Toyota 收購。呢份為咗生存而執著嘅 original idea，比起任何完美嘅 AI prompt 都更具備靈魂。又或者 Muji 嗰套「晾衫」廣告，玩減法，完全冇故事冇對白，只係影住幾件衫隨風飄揚，嗰種自在感係一種生活態度嘅表達，唔係靠 prompt 就出到嚟嘅「內容」。
+
+要對抗數碼無聊，答案可能喺 Philip Kotler 講嘅 Marketing 6.0 裡面。佢提到「multisensory physical experience」係 digital 永遠替代唔到嘅。好似周生生將品牌理念融入線下空間，同「媽咪雞蛋仔」玩 Cross-over，將珠寶嘅抽象祝福變做可以品嚐嘅雞蛋仔，呢啲實實在在嘅五官感受，先至係對抗無聊嘅最強武器。科技點變都好，會被感動嘅人心係唔會變。我哋要執著返啲 AI 覺得唔效率、甚至係多餘嘅細節。只要我哋仲肯花心思去寫一句好似「One Chair is Enough」咁狂妄又迷人嘅文案，或者好似今屆 Kam Fan 班學生哥咁熱血，為咗個 MK 翻譯 app Mars*sage 認真製作，廣告業就仲有團火喺度。唔好俾 AI 磨平你個稜角，留返份人情味，呢個世界需要更多有血有肉嘅創意。</div>
+    </div>
+    <div class="ver-panel editor-panel" data-slug="ai-2026-ai" data-idx="1">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge">舊版 −1</span>
+        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-07-31T05:59</span></div>
+      <div class="nblm-body editor-body">2026 年嘅康城，成條 La Croisette 街都係 AI。海灘邊嘅酒會大家唔係傾緊邊間 Agency 攞獎，而係 exchange 緊邊個 model 最好用。班老細成班餓狼咁，見到 AI 就以為執到寶，成口術語諗住點樣用 prompt 壓低 production cost，甚至直情想 skip 咗成個 creative process。點知今年康城最入肉嘅一擊，居然係一個咁樣嘅論壇主題：「私たちはAIで、世界を退屈にしているのか？」。問緊我哋係咪變緊做無聊大師。呢個「無聊警報」喺一堆科技狂熱入面顯得特別刺耳，好似一盤冰水淋落去班所謂「AI 專家」個頭度，叫大家醒吓，唔好再沉迷嗰種冇靈魂、FMCG mindset 嘅技術呈現。
+
+點解會有無聊感？因為 AI 嘅 logic 根本就係「平均值陷阱」。所有 algorithm 生成出嚟嘅嘢，都係基於過去數據嘅 safe choice。用 production house logic 嚟講，AI 產量係高，efficiency 係快，但出嚟嘅 generic content 個個都好似工廠倒模咁。AI 嘅優點係「太完美」，而呢種完美正好係創意嘅致命傷。第一次睇 AI 生成三大科技巨人變老或者係驚喜，但好似 AICandy 嗰套 Energym 廣告咁，將 Musk 同 Altman 呢班 AI disrupters 拍成《黑鏡》式恐怖片，直指 2050 年人類會變成 AI 嘅發電「電池」，呢份驚心動魄係因為佢夠寫實、夠諷刺。如果我哋淨係追求 AI 生成嘅完美畫面，而無視咗嗰份對現實嘅冒犯同痛感，創意就變咗大數據嘅囚犯，抹殺晒所有意料之外嘅驚喜。
+
+康城論壇提到「退屈の正体」，即係無聊嘅真相。無聊源於 Predictability（可預測性），人係鍾意 Irregularity（不規則性）。廣告人最自豪嘅 Insight，通常嚟自 AI 捉唔到嘅生活細微掙扎。就好似 Madman Archive 講《碧咸傳》，點解全城都要食花生？唔係因為佢哋家庭完美，而係因為 Studio 99 製作出嚟嗰份「計算過嘅混亂」。世人唔係睇唔出完美形象經過精心設計，但就係鍾意睇嗰種 FOMO 式嘅「真實裂痕」，呢份人性嘅掙扎先至係 Human Connection。或者好似陳豪嗰啲保險廣告，點解咁到肉？因為佢真係演活咗一個一人養全家、充滿真實壓力嘅「顧家好男人」，佢眼神入面嗰份疲累係 AI 永遠模仿唔到嘅，因為 AI 根本唔需要養家。AI 可以模仿 Craft，但佢暫時仲未明咩叫「明就明」嘅共鳴。
+
+面對 AI 浪潮，創意人嘅生存策略係要學識 Embrace the Messiness。唔好諗住同 AI 鬥快，你要鬥嘅係 AI 永遠唔明嘅人情味同埋嗰份質感。我哋要將 AI 當成一個加速執行嘅 tool，而唔係成個 campaign 嘅 soul。就好似當年首席設計師 Pinky Lai 幫保時捷設計 911 996 型號，嗰對「荷包蛋」頭燈當年人人喊打話核突，但其實係一個「絕地求生」嘅慳錢方案，成功令保時捷喺財困中生存落嚟，冇被 Benz 或 Toyota 收購。呢份為咗生存而執著嘅 original idea，比起任何完美嘅 AI prompt 都更具備靈魂。又或者 Muji 嗰套「晾衫」廣告，玩減法，完全冇故事冇對白，只係影住幾件衫隨風飄揚，嗰種自在感係一種生活態度嘅表達，唔係靠 prompt 就出到嚟嘅「內容」。
+
+要對抗數碼無聊，答案可能喺 Philip Kotler 講嘅 Marketing 6.0 裡面。佢提到「multisensory physical experience」係 digital 永遠替代唔到嘅。好似周生生將品牌理念融入線下空間，同「媽咪雞蛋仔」玩 Cross-over，將珠寶嘅抽象祝福變做可以品嚐嘅雞蛋仔，呢啲實實在在嘅五官感受，先至係對抗無聊嘅最強武器。科技點變都好，會被感動嘅人心係唔會變。我哋要執著返啲 AI 覺得唔效率、甚至係多餘嘅細節。只要我哋仲肯花心思去寫一句好似「One Chair is Enough」咁狂妄又迷人嘅文案，或者好似今屆 Kam Fan 班學生哥咁熱血，為咗個 MK 翻譯 app Mars*sage 認真製作，廣告業就仲有團火喺度。唔好俾 AI 磨平你個稜角，留返份人情味，呢個世界需要更多有血有肉嘅創意。</div>
+    </div></div>
+  <div class="ver-dots editor-dots"><span class="ver-dot on"></span><span class="ver-dot"></span></div>
+  <div class="fc-box fact-box"><div class="fc-row fact-row"><span class="fc-pill fact-pill ok">✅8</span><span class="fc-pill fact-pill mute">❌0</span><span class="fc-pill fact-pill unv">⚠️3</span><button class="btn btn-ghost btn-sm" onclick="runFactcheck('ai-2026-ai',this)">🔍 核對資料</button></div><details class="fc-detail fact-detail" open><summary>核對結果（2026-07-31T06:01）</summary><div class="fc-flag fact-flag unv">⚠️ 2026 年的康城（Cannes Lions）論壇主題為「私たちはAIで、世界を退屈にしているのか？」。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ Madman Archive 曾製作過《碧咸傳》廣告。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ Kam Fan 學生製作了 MK 翻譯 app Mars*sage 的廣告。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div></details></div>
+  <details class="src-panel source-panel">
+    <summary onclick="loadSources('ai-2026-ai')">🔍 揀 Source 重寫</summary>
+    <div id="src-ai-2026-ai" class="src-list source-list">載入中…</div>
+    <div class="rewrite-note-row source-note-row">
+      <input type="text" id="note-ai-2026-ai" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
+    </div>
+    <button class="btn btn-dark btn-sm" style="margin-top:8px"
+            onclick="rewriteWithSources('ai-2026-ai',this)">✍️ 用揀咗嘅 source 重新生文</button>
+  </details>
+  <div class="nblm-actions">
+    <button class="btn btn-dark btn-sm" onclick="saveWP('ai-2026-ai',this)">💾 存入 WP 草稿（最新版）</button>
+    <button class="btn btn-ghost btn-sm" onclick="runMulti('ai-2026-ai',this)">🔁 試其他 model 寫同一素材</button>
+  </div>
+  
+  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/ai-2026-ai/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('ai-2026-ai',this)">📁 我已掉好圖 → 出 WP</button></details>
+</div>
+<div class="nblm-card surface-card pad-lg editor-card" id="nblm-speaks-for-itself">
+  <div class="nblm-header editor-head">
+    <span class="nblm-badge editor-badge">NBLM</span>
+    <span class="nblm-slug editor-slug">speaks-for-itself</span>
+    
+  </div>
+  <h3 class="nblm-title editor-title">Speaks for itself</h3>
+  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#777;color:#fff;font-size:12px;font-weight:700">🕒 新鮮度待查</span><span style="color:#666;font-size:12px;margin-left:8px">parse fail: 正在查證「Speaks for itself」campaign 的最早發布與時效。</span></div>
+  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#0891b2;color:#fff;font-size:12px;font-weight:700">🪶 輕mode（模型知識+把聲直出）</span><span style="color:#666;font-size:12px;margin-left:8px">來源日期為2026年，屬於未來事件且內容不確定，必須透過 research 確認事實。</span></div>
+  <div class="ver-track editor-track" id="track-speaks-for-itself">
+    <div class="ver-panel editor-panel" data-slug="speaks-for-itself" data-idx="0">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
+        <span class="ver-note editor-note">輕mode(Curation NB直出)</span><span class="ver-ts editor-ts">2026-07-31T02:51</span></div>
+      <div class="nblm-body editor-body">好的廣告，不是靠龐大的預算堆砌出來的，不是靠明星陣容硬塞出來的，更不是靠幾百字空洞的 Copywriting 吹噓出來的。今時今日做 Branding，整個行業似乎陷入了一場集體的「話語焦慮」。Client 總想把產品所有的 USP（Unique Selling Proposition）一股腦兒全部填滿，Agency 總想用最閃亮的 Visual、最吵鬧的 Voiceover 去強行搶奪 Attention。然而，你有沒有想過，當全世界都在歇斯底里地大聲疾疾時，最安靜的那一個，反而最耀眼？真正的自信，叫作 Speaks for itself。
+
+在 Marketing 6.0 的時代，消費者每天被數以千計的廣告訊息轟炸，神經早已麻木。大家對那些天花亂墜的口號與叫賣式行銷產生了強烈的免疫力。在這個背景下，選擇「讓作品自己說話」（Product-led），絕非被動退讓，而是極度高明的 Brand Positioning。品牌與其花盡心思去說服大眾「我有多好」，不如大膽地退後一步，把舞台徹底還給作品與產品本身。這不是偷懶，而是極度危險且高門檻的策略選擇。當你決定省略所有的文字修飾與硬推（Hard sell），就意味著你的 Product 必須具備無懈可擊的硬實力，你的 Insight 必須精準到一針見血。
+
+簡潔就等於空洞？當然唔係。相反，簡潔係經過極致提煉之後嘅極致自信。你見過真正嘅豪門需要將存摺貼喺額頭上面咩？只有心虛嘅品牌，先需要靠密密麻麻嘅宣傳單張去給自己壯膽。
+
+要做到 Speaks for itself，關鍵全在於 Craft（工藝與執行）。當一個 Campaign 屏棄了繁複的劇情套路與聳動的視覺特效，所有的焦點就會無所遁形地落在細節上。無論是鏡頭語言中的光影定格、材質紋理的真實呈現，還是聲音設計中的微妙留白，都是在用最客觀的物理細節去建立信任。真正頂級的創作，懂得利用物理事實取代誇張的形容詞。它不需要告訴你「這很精湛」，它只需要把工序與結構坦蕩蕩地展示出來；它不需要宣傳「這很治癒」，它只需要拍下洗好的衣服在風中輕輕飄動的畫面。這種平實的質感，比任何華麗的修辭都更有份量。
+
+點解有啲廣告睇完令人心頭一暖，有啲睇完只覺得噪音洗腦？關鍵就在於你有冇留白嘅勇氣。留白，唔係留空，而係給觀眾留出思考與共鳴嘅空間（Breathing room）。當你把話講得太滿、把答案硬塞到讀者嘴邊，你其實係否定緊消費者嘅智商。
+
+深入拆解其底層 Insight，Speaks for itself 之所以能建立起深層的 Connection，是因為它精準地捕捉到了當代人最真實的心理痛點。在這個訊息爆炸、算法推擠的時代，大眾早已陷入資訊過載（Information overload）的審美疲倦。人們需要的不是更多教導你如何生活的教條，而是一個能讓人喘息、能被看見真實自我的時刻。當作品展現出一種不加修飾的真實，甚至帶有一點不完美的誠實，它反而能建立起最強大的信任感（Trust）。買唔買一件產品，消費者其實只係喺度搵緊一個理由去說服自己，去 justify 嗰份價錢。當作品能夠靜靜地佇立在那裡，給出那個最純粹的解答，所有的溝通便在一瞬間完成。
+
+你以為消費者買嘅係嗰件產品？錯喇。佢哋買嘅，其實係一個說服自己嘅理由，一種對理想生活嘅投射。當你嘅作品能夠靜靜地戳中佢哋內心最軟嘅嗰一塊，根本唔需要你多言，佢哋自己就會喺腦海中幫你補全所有嘅優點。
+
+看看今天互聯網上氾濫的「機器腔」與公關稿，我們更能體會到 Speaks for itself 的珍貴。大語言模型可以在三秒內生成數千字看似完美、邏輯對稱的 Copywriting，充斥著生硬的語法對比與高深莫測的企業黑話。但這種看似無懈可擊的文本，卻充滿了虛無的機械感，讀完只讓人感到疏離。因為機器缺乏對真實物理世界的感知，只能依賴抽象的詞彙去強行昇華。而真正的 Human touch，恰恰來自於對具體生活的捕捉、來自於敢於留白的克制。當機器學會了說客套話與廢話，真實與簡潔就成為了人類創作最不可替代的尊嚴。
+
+AI 可以喺三秒內生成一萬字看似完美嘅 Copywriting，但佢生成到嗰份來自真實生活嘅呼吸感咩？生成到嗰份平實而震撼嘅人情味咩？完全做唔到。當機器學會咗說客套話，真實與克制就成為咗人類創作最核心嘅護城河。
+
+作品本身會說話，絕非單純的創意手法，而是品牌最高級的修養。在這個流行喧囂的市場裡，多數品牌都在忙著製造 Attention，唯有極少數的智者在經營 Connection。Attention 可以用錢堆砌，但 Connection 只能用真心與實力去換取。不要再害怕停頓，不要再恐懼留白。把那些多餘的包裝與修飾一層層剝開，讓真正有價值的東西裸露出來。
+
+Verdict：好的作品，不需要翻譯；自信的品牌，Speaks for itself。</div>
+    </div></div>
+  <div class="ver-dots editor-dots"></div>
+  <div class="fc-box fact-box"><div class="fc-row fact-row"><span class="fc-pill fact-pill ok">✅3</span><span class="fc-pill fact-pill bad">❌1</span><span class="fc-pill fact-pill unv">⚠️4</span><button class="btn btn-ghost btn-sm" onclick="runFactcheck('speaks-for-itself',this)">🔍 核對資料</button></div><details class="fc-detail fact-detail" open><summary>核對結果（2026-07-21T20:09）</summary><div class="fc-flag fact-flag unv">⚠️ iPhone 17 Pro 的廣告文案包含 &quot;Makes a strong case for itself&quot;。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ 台灣版同款廣告翻譯為「一身強悍實力」。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ 奢侈品市場在寒冬中仍增長 8.9%。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ Stool 60 的設計包含研發蒸汽熱壓技術將實木 90 度扭彎，並以三粒螺絲平貼在底部。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag bad"><b>❌ 是枝裕和執導了 iPhone 長片《Last Scene》。</b><div class="fc-correct fact-correct">正確：是枝裕和執導了以 iPhone 16 Pro 全片拍攝的劇情短片《Last Scene》（約27分鐘），並非長片。</div></div></details></div>
+  <details class="src-panel source-panel">
+    <summary onclick="loadSources('speaks-for-itself')">🔍 揀 Source 重寫</summary>
+    <div id="src-speaks-for-itself" class="src-list source-list">載入中…</div>
+    <div class="rewrite-note-row source-note-row">
+      <input type="text" id="note-speaks-for-itself" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
+    </div>
+    <button class="btn btn-dark btn-sm" style="margin-top:8px"
+            onclick="rewriteWithSources('speaks-for-itself',this)">✍️ 用揀咗嘅 source 重新生文</button>
+  </details>
+  <div class="nblm-actions">
+    <button class="btn btn-dark btn-sm" onclick="saveWP('speaks-for-itself',this)">💾 存入 WP 草稿（最新版）</button>
+    <button class="btn btn-ghost btn-sm" onclick="runMulti('speaks-for-itself',this)">🔁 試其他 model 寫同一素材</button>
+  </div>
+  
+  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/speaks-for-itself/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('speaks-for-itself',this)">📁 我已掉好圖 → 出 WP</button></details>
+</div><nav class="quick-nav"><a href="inspiration-2.html">← 上一頁</a><a>第 3 / 3 頁</a></nav></section>
+  
+  
+  <section class="sec-block" id="cand"><div class="sec-head">📰 今日新料 </div><div class="empty-state"></div></section>
+  
+</div>
+<button class="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<footer>廣告狂人內容策展系統 v2</footer>
+<script>
+function loadSources(slug) {
+  var el = document.getElementById('src-' + slug);
+  if (el && el.dataset.loaded) return;
+  fetch('http://127.0.0.1:8898/nb_sources?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (!d.ok) { el.textContent = '錯誤: ' + (d.error||''); return; }
+      el.dataset.loaded = '1';
+      el.innerHTML = '<div style="font-size:11px;color:var(--sub);margin-bottom:6px">' +
+        'Brand NB: ' + d.brand + ' · ' + d.sources.length + ' 個 source</div>' +
+        d.sources.map(function(s) {
+          var checked = s.title.includes('[ARCHIVE]') || s.title.includes('[AD-RESEARCH]') || s.title.includes('[BRAND]') ? 'checked' : 'checked';
+          return '<label class="src-item"><input type="checkbox" ' + checked +
+            ' data-sid="' + s.id + '" data-slug="' + slug + '">' +
+            '<span class="src-type">' + (s.stype||'?') + '</span>' +
+            '<span>' + (s.clean||s.title||'').substring(0,80) + '</span></label>';
+        }).join('');
+    })
+    .catch(e => { el.textContent = 'Listener 未開: ' + e.message; });
+}
+
+function rewriteWithSources(slug, btn) {
+  var checked = document.querySelectorAll('input[data-slug="' + slug + '"]:checked');
+  var ids = Array.from(checked).map(function(cb) { return cb.dataset.sid; });
+  if (ids.length === 0) { alert('要至少揀一個 source'); return; }
+  var noteEl = document.getElementById('note-' + slug);
+  var note = noteEl ? noteEl.value.trim() : '';
+  var url = 'http://127.0.0.1:8898/write_nblm?slug=' + encodeURIComponent(slug) + '&src=' + ids.join(',');
+  if (note) url += '&note=' + encodeURIComponent(note);
+  btn.disabled = true; btn.textContent = '⏳ 生文中…新版會出喺最左';
+  fetch(url)
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 生文緊 — 完成後 reload 睇新版'; }
+      else { btn.disabled=false; btn.textContent='✍️ 用揀咗嘅 source 重新生文'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='✍️ 用揀咗嘅 source 重新生文'; alert(e.message); });
+}
+
+// carousel: 載入時強制去最左（最新版），scroll 時更新 dot
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.ver-track').forEach(function(track) {
+    track.scrollLeft = 0;  // 預設最新版（index 0，最左）
+    var card = track.closest('.nblm-card');
+    var dots = card ? card.querySelectorAll('.ver-dot') : [];
+    if (!dots.length) return;
+    dots.forEach(function(d, i) { d.classList.toggle('on', i === 0); });
+    track.addEventListener('scroll', function() {
+      var idx = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach(function(d, i) { d.classList.toggle('on', i === idx); });
+    });
+  });
+});
+
+function runFactcheck(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 查證中… Gemini掃+sonar覆查 約 2 分鐘';
+  fetch('http://127.0.0.1:8898/factcheck?slug=' + encodeURIComponent(slug) + '&cross=1')
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 查緊 — 完成後 reload 睇結果'; }
+      else { btn.disabled=false; btn.textContent='🔍 核對資料'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='🔍 核對資料'; alert('Listener 未開: '+e.message); });
+}
+
+function saveWP(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 入 WP…';
+  fetch('http://127.0.0.1:8898/save_wp?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 入咗 WP 草稿'; }
+      else { btn.disabled=false; btn.textContent='💾 存入 WP 草稿'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='💾 存入 WP 草稿'; alert('Listener 未開: '+e.message); });
+}
+
+function saveWPManual(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 配圖出 WP…';
+  fetch('http://127.0.0.1:8898/save_wp_manual?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 已觸發（' + d.imgs + ' 張）— 完成後 reload 睇 WP 草稿'; }
+      else { btn.disabled=false; btn.textContent='📁 我已掉好圖 → 出 WP'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='📁 我已掉好圖 → 出 WP'; alert('Listener 未開: '+e.message); });
+}
+
+function copyText(slug, btn) {
+  var ta = document.getElementById('cp-' + slug);
+  if (!ta) return;
+  navigator.clipboard.writeText(ta.value).then(function() {
+    btn.textContent = '✅ Copy 咗 — 直接貼 IG/Threads';
+  }, function() {
+    ta.style.position = 'static'; ta.style.height = 'auto'; ta.select();
+    document.execCommand('copy'); btn.textContent = '✅ Copy 咗';
+  });
+}
+
+function runMulti(slug, btn) {
+  btn.disabled = true; btn.textContent = '⏳ 跑緊… 等 WhatsApp 通知';
+  fetch('http://127.0.0.1:8898/write_multi?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) { btn.textContent = '✅ 已觸發 — 完成後 reload 睇 AI 擂台'; }
+      else { btn.disabled=false; btn.textContent='🔁 試其他 model 寫同一素材'; alert(d.error||JSON.stringify(d)); }
+    })
+    .catch(e => { btn.disabled=false; btn.textContent='🔁 試其他 model 寫同一素材'; alert('Listener 未開: '+e.message); });
+}
+
+function triggerWrite(slug, btn) {
+  if (!slug) return;
+  btn.disabled = true;
+  btn.textContent = '⏳ 寫緊… 5-8 分鐘後 WhatsApp 通知';
+  fetch('http://127.0.0.1:8898/write?slug=' + encodeURIComponent(slug))
+    .then(r => r.json())
+    .then(d => {
+      if (d.ok) {
+        btn.textContent = '✅ 已觸發 — 等 WhatsApp 通知';
+      } else {
+        btn.disabled = false;
+        btn.textContent = '✍️ 出呢篇';
+        alert('Error: ' + (d.error || JSON.stringify(d)));
+      }
+    })
+    .catch(e => {
+      btn.disabled = false;
+      btn.textContent = '✍️ 出呢篇';
+      alert('Listener 未開: ' + e.message);
+    });
+}
+
+</script>
+</body>
+</html>
