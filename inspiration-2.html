@@ -218,6 +218,11 @@ a { text-decoration: none; }
   font-size: 14px;
   padding: 10px 18px;
   border-radius: 12px;
+  min-height: 44px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .btn-red {
   background: var(--red);
@@ -230,7 +235,7 @@ a { text-decoration: none; }
   border: 1px solid var(--line);
 }
 .btn-ghost:hover { background: var(--line); }
-.btn-sm { font-size: 13px; padding: 7px 14px; }
+.btn-sm { font-size: 13px; padding: 10px 14px; min-height: 44px; }
 
 /* 待出街 card */
 .pub-card {
@@ -278,6 +283,7 @@ a { text-decoration: none; }
   overflow: hidden;
 }
 .pub-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+@media(max-width:480px){.pub-actions,.nblm-actions{flex-direction:column;align-items:stretch}}
 
 /* AI 擂台 */
 .arena-block { margin-bottom: 16px; overflow: hidden; }
@@ -428,7 +434,7 @@ footer { text-align: center; color: var(--sub); font-size: 12px; padding: 18px 0
 <!-- generated-by: scripts/core/nlm-bridge/lab_ui_shell.py -->
 <header class="site-header">
   <span class="site-title">廣告狂人 · 內容策展</span>
-  <span class="site-meta">2026-09-07 · 2026-09-07 05:42</span>
+  <span class="site-meta">2026-09-08 · 2026-09-08 06:17</span>
 </header>
 <nav class="quick-nav">
   <a href="#nblm">🟣 NBLM 底稿</a>
@@ -440,7 +446,65 @@ footer { text-align: center; color: var(--sub); font-size: 12px; padding: 18px 0
 </nav>
 <div class="wrap" id="top">
   
-  <section class="sec-block" id="nblm"><div class="sec-head">🟣 NBLM 底稿 — 睇完先決定（第 2/4 頁 · 共 42 篇） <span class="sec-badge">42</span></div><nav class="quick-nav"><a href="inspiration.html">← 上一頁</a><a>第 2 / 4 頁</a><a href="inspiration-3.html">下一頁 →</a></nav>
+  <section class="sec-block" id="nblm"><div class="sec-head">🟣 NBLM 底稿 — 睇完先決定（第 2/4 頁 · 共 43 篇） <span class="sec-badge">43</span></div><nav class="quick-nav"><a href="inspiration.html">← 上一頁</a><a>第 2 / 4 頁</a><a href="inspiration-3.html">下一頁 →</a></nav>
+<div class="nblm-card surface-card pad-lg editor-card" id="nblm-2">
+  <div class="nblm-header editor-head">
+    <span class="nblm-badge editor-badge">NBLM</span>
+    <span class="nblm-slug editor-slug">2</span>
+    <span class="ver-hint editor-hint">← 滑去睇舊版（共 2 版）</span>
+  </div>
+  <h3 class="nblm-title editor-title">完璧主義の時代に “作画崩壊” で挑む アロンアルフアが『つくの子2』に込めた想い</h3>
+  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#c0392b;color:#fff;font-size:12px;font-weight:700">🔴 old news：已報 227 個月（但仲 active）</span><span style="color:#666;font-size:12px;margin-left:8px">AMC 電視劇《廣告狂人》(Mad Men) 於 2007 年 7 月 19 日首播。該劇集及其相關討論和分析至今仍有新發展和報導。</span></div>
+  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#7c3aed;color:#fff;font-size:12px;font-weight:700">🔬 研究mode（實時查料 grounding）</span><span style="color:#666;font-size:12px;margin-left:8px">內容涉及特定動漫作品及近期（2026年）發布的具體宣傳活動，且包含特定創作者的個人觀點與細節，需透過 research 確認事實。</span></div>
+  <div class="ver-track editor-track" id="track-2">
+    <div class="ver-panel editor-panel" data-slug="2" data-idx="0">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
+        <span class="ver-note editor-note">執聲(Curation NB)</span><span class="ver-ts editor-ts">2026-08-27T06:38</span></div>
+      <div class="nblm-body editor-body">在這個 AI 隨便畫都靚到嘔、盲目追求完璧主義的年代，創作人其實生存得極之壓抑。大家打開 Threads 或者 IG，見到的全部都是經 Filter 執到完美、或者由 AI 生成到零瑕疵的 Work。當大眾對「完美」的期待值被拉到上天，後生一輩對創作反而變得愈來愈謹慎，驚死一出街就被網民捉到錯處指摘。這種「不准犯錯」的集體焦慮，正正就是 Creative 的頭號天敵。然而，日本東亞合成最近為旗下萬能膠品牌 Aron Alpha 推出續篇動畫《つくの子2～再接着～》，就真的玩得極之毒辣，直接向大家證明：失敗不單止不醜怪，還可以拿來大玩特玩，甚至玩大佢。**驚錯，不如一齊癲。**
+
+這單嘢最癲的地方，是它將動畫業界最痛恨的「逐格驗屍」行為，直接化作整個 Campaign 的核心機制。在短短 140 秒的動畫裏面，品牌「刻意」製造了 19 個所謂的「作畫崩壞」失誤。由角色手指數量不對、比例歪掉到穿幫位，全部都是精準設計出來的「瑕疵」。然後他們在 X 吹大雞叫網民「逐格驗屍」找出這 19 個崩壞位，更設下了 129 個中獎名額。著名監督大塚隆史以前講過，網民截圖靜止格來鬧「崩壞」其實對動畫師好不公平，因為 Animation 本來就是要動起來看的；但 Aron Alpha 竟然反其道而行，懸賞請你去做這件平時會令 Production Team 炎上的事。這種將指摘文化收編為 brand traffic 燃料的 Strategy，真心是 Masterclass 級數。**你愈想捉錯，我愈懸賞你。**
+
+其實這條 Video 絕非單純玩 Gimmick 那麼簡單，背後的商業邏輯鎖得極之扎實。這動畫的真正 USP，是將「作畫崩壞」與產品線裏面的「はがし隊」（去膠液）做了一個完美的 Logic Connection。萬能膠最怕甚麼？不就是怕黏錯手或者黏歪了。品牌索性將「作畫崩壞 → 修正」的過程，直接轉化為 Product Demo——黏錯了可以撕，撕完可以重新黏過。買這支去膠液，實質就是買了一個實體版的 Undo 掣。它將一個本來極其枯燥的 Functional Benefit，轉化成一個充滿人情味的 Emotional Support：溫柔地告訴那群創作者，重新來過的機會其實永遠在身邊。**買去膠液，買個後悔藥。**
+
+再拆解深一層的 Insight，動畫主角今直筑乃被退團、要在可容納 929 萬人的「東亞巨蛋」挑戰 Live，根本是對 K-POP 偶像工業的極致諷刺。品牌由頭到尾都在大玩「929」這個諧音梗（Kuttsuku，即是日文「黏住」之意），由抽獎人數到球速全部都是這個數字，甚至連 9 月 29 日的「接着の日」都計埋入去。歌詞那句「エジソン マジ尊」（愛迪生真神）簡直是畫龍點睛，引用愛迪生失敗一萬次才成功的 Story，去撐住那群害怕失敗的後生仔。這種用二次元黑話來講人生道理的手法，比那些老老實實、老正到令人打冷震的勵志廣告，要刺痛、到肉得多。**大道理，洗腦歌先入耳。**
+
+說到底，這種「連崩壞都必須精準設計」的高成本玩法，其實體現了品牌極強大的 Confidence。要畫一條精美無瑕的 Animation 容易，但要用極高的 Control 去模擬失敗，甚至預告在 9 月 14 日公開「修正版」，這份自信，根本是裝不出來的。片中歌詞提到「失敗零次只是都市傳說」（失敗ゼロなんて都市伝説），這句話其實充滿力量，它大方承認人類的失誤，反而令 Brand 顯得更具人性、更有溫度。比起那些年年標榜自己 Most Powerful Ever 的 Tech Giants，Aron Alpha 這份「我知道你會錯，我陪你執手尾」的姿態，才是建立 Connection 的最強防線。**完美很遠，失敗很近。**
+
+回歸香港的 Local 語境，我們常說的「執生」，本質上也是一種面對失敗、然後再試一次的生命力。好似之前贏得金帆獎學生組的 Mars*sage 翻譯 App，用 MK 文化來大爆 Creative；又或者之前文案人 Tim 大方承認自己「抵死」想做專才，這份不怕被笑、敢於面對失靈的勇氣，才是香港品牌最缺的死穴。香港品牌很多時候太過追求廣告片要多精緻完美，卻很少敢將「失敗」遊戲化。Aron Alpha 結結實實地告訴我們：真正的 Brand Connection 絕非建立在完美之上，而是建立於你如何陪伴 Consumer 一起試錯。畢竟，一個願意陪你一起「執生」、拍拍你肩膀說「失敗可以再接過」的 Brand，才是最幫到手的戰友。**完美有罪，試錯無罪。**</div>
+    </div>
+    <div class="ver-panel editor-panel" data-slug="2" data-idx="1">
+      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge">舊版 −1</span>
+        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-08-27T06:38</span></div>
+      <div class="nblm-body editor-body">喺呢個所謂 AI 畫乜都靚到嘔、追求完璧主義嘅年代，創作人其實生存得好壓抑。大家打開 Threads 或者 IG，見到嘅全部都係經濾鏡執到完美、或者由 AI 生成到零瑕疵嘅作品。當大眾對「完美」嘅期待值被拉到上天，後生一輩對創作反而變得越嚟越謹慎，驚死一出街就被網民捉到錯處指摘。呢種「唔准錯」嘅集體焦慮，正正係創意最大嘅敵人。但係日本東亞合成最近為旗下萬能膠品牌 Aron Alpha 推出嘅續篇動畫《つくの子2～再接着～》，就真係玩得好鬼辣，佢話畀大家聽：失敗唔單止唔醜樣，仲可以攞嚟玩，甚至玩大佢。
+
+呢單嘢最癲嘅地方係，佢將動畫業界最痛恨嘅「逐格驗屍」行為，直接變做個 Campaign 核心機制。喺一條 140 秒嘅動畫入面，品牌「刻意」製造咗 19 個所謂嘅作畫崩壞失誤。由角色手指數量唔啱、比例歪晒、到穿幫位，全部都係設計出嚟嘅「瑕疵」。然後佢哋喺 X 叫網民「逐格驗屍」搵出呢 19 個崩壞位，仲設下 129 個中獎名額。著名監督大塚隆史以前講過，網民截圖靜止格嚟鬧「崩壞」其實對動畫師好唔公平，因為動畫係要郁住睇嘅；但 Aron Alpha 竟然反其道而行，懸賞請你去做呢件平時會令製作組炎上嘅事。呢種將指摘文化收編為品牌流量燃料嘅 Strategy，真心係 Masterclass 級數。
+
+其實呢條片唔係單純玩 Gimmick 咁簡單，背後個商業邏輯鎖得好死。呢條動畫嘅真正 USP，係將「作畫崩壞」同產品線入面嘅「はがし隊」（去膠液）做咗個完美嘅邏輯連接。萬能膠最怕黏錯手或者黏歪咗，品牌就將「作畫崩壞 → 修正」嘅過程，直接轉化做產品功能演示：黏錯咗可以撕、撕完可以再黏。買咗支去膠液，其實係買咗個實體版嘅 Undo 掣。佢將一個好 Dry 嘅 Functional Benefit，轉化成一個好有人情味嘅 Emotional Support：話畀班創作者知，重新嚟過嘅機會永遠喺你身邊。
+
+再睇深一層個 Insight，動畫主角今直筑乃被退團、要喺可容納 929 萬人嘅「東亞巨蛋」挑戰 Live，根本就係對 K-POP 偶像工業嘅極致諷刺。品牌由頭到尾都喺度玩緊「929」呢個諧音梗（Kuttsuku，即係黏住咁解），由抽獎人數到球速全部都係呢個數，甚至連 9 月 29 日「接着の日」都計埋入去。歌詞嗰句「エジソン マジ尊」（愛迪生真係神）簡直係畫龍點睛，引用愛迪生失敗一萬次先成功嘅故仔，去撐住班驚失敗嘅後生仔。呢種用二次元黑話去講人生哲理嘅手法，比嗰啲老正嘅勵志廣告到肉得多。
+
+講到尾，呢種「連崩壞都要設計過」嘅高成本玩法，其實體現咗品牌極大嘅 Confidence。要畫一條靚片好容易，但要用高控制力去模擬失敗，仲要預告喺 9 月 14 日公開修正版，呢份自信係買返嚟嘅。片中歌詞提到「失敗零次只係都市傳說」（失敗ゼロなんて都市伝説），呢句說話其實好有力度，佢承認咗人類嘅失誤，反而令品牌顯得更有人性、更有溫度。比起嗰啲年年話自己係 Most Powerful Ever 嘅科技巨頭，Aron Alpha 呢份「我知你會錯，我陪你執手尾」嘅姿態，先至係最強嘅 Connection。
+
+返到嚟香港嘅語境，我哋成日講「執生」，其實都係一種面對失敗、再試一次嘅生命力。好似之前贏咗金帆獎學生組嘅 Mars*sage 翻譯 App，用 MK 文化嚟搞創意，或者之前文案人 Tim 大方承認自己「抵死」想做專才，呢份唔怕被笑、敢於面對失靈嘅勇氣，先至係香港品牌最缺嘅嘢。香港品牌好多時太追求廣告片要幾靚，但好少敢將「失敗」遊戲化。Aron Alpha 話畀我哋知，真正嘅品牌連繫唔係建立喺完美上面，而係建立喺你點樣陪住消費者一齊試錯。畢竟，一個願意陪你一齊「執生」、話畀你知「失敗可以再接過」嘅牌子，先至係最幫到手嘅戰友。</div>
+    </div></div>
+  <div class="ver-dots editor-dots"><span class="ver-dot on"></span><span class="ver-dot"></span></div>
+  <div class="fc-box fact-box"><div class="fc-row fact-row"><span class="fc-pill fact-pill ok">✅5</span><span class="fc-pill fact-pill bad">❌2</span><span class="fc-pill fact-pill unv">⚠️2</span><button class="btn btn-ghost btn-sm" onclick="runFactcheck('2',this)">🔍 核對資料</button></div><details class="fc-detail fact-detail" open><summary>核對結果（2026-06-23T09:06）</summary><div class="fc-flag fact-flag unv">⚠️ 數碼廣告佔比為 59.4%。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ 香港消費者對 KOL 的信任度高達 68%，而對傳統廣告的信任度為 35%。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag bad"><b>❌ 《南華早報》、《明報》與《星島日報》擁有數以百萬計的讀者。</b><div class="fc-correct fact-correct">正確：《南華早報》印刷版讀者人數約為1.7萬至34.7萬之間，線上活躍用戶約5000萬。 《明報》約有40萬讀者。 《星島日報》讀者人數約為25.3萬至31.4萬之間，其姊妹報《頭條日報》讀者人數超過100萬。</div></div><div class="fc-flag fact-flag bad"><b>❌ 2025年有超過 45% 的用戶已習慣直接向 AI 工具提問。</b><div class="fc-correct fact-correct">正確：截至2025年下半年，全球約有16.3%的人口使用生成式AI工具。</div></div></details></div>
+  <details class="src-panel source-panel">
+    <summary onclick="loadSources('2')">🔍 揀 Source 重寫</summary>
+    <div id="src-2" class="src-list source-list">載入中…</div>
+    <div class="rewrite-note-row source-note-row">
+      <input type="text" id="note-2" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
+    </div>
+    <button class="btn btn-dark btn-sm" style="margin-top:8px"
+            onclick="rewriteWithSources('2',this)">✍️ 用揀咗嘅 source 重新生文</button>
+  </details>
+  <div class="nblm-actions">
+    <button class="btn btn-dark btn-sm" onclick="saveWP('2',this)">💾 存入 WP 草稿（最新版）</button>
+    <button class="btn btn-ghost btn-sm" onclick="runMulti('2',this)">🔁 試其他 model 寫同一素材</button>
+  </div>
+  
+  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/2/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('2',this)">📁 我已掉好圖 → 出 WP</button></details>
+</div>
 <div class="nblm-card surface-card pad-lg editor-card" id="nblm-条例で仕掛ける-愛されるまち-戦略-相模原市がロケ誘致で挑む-シビックプライド-シティプロモーション">
   <div class="nblm-header editor-head">
     <span class="nblm-badge editor-badge">NBLM</span>
@@ -1844,86 +1908,6 @@ Spotify 宜家選擇主動揭露邊個係 AI 藝人，呢吓 Strategy 直頭係�
   </div>
   
   <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/项目频道-汉堡王-美黑晒伤-真正的火烤技术还得看我/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('项目频道-汉堡王-美黑晒伤-真正的火烤技术还得看我',this)">📁 我已掉好圖 → 出 WP</button></details>
-</div>
-<div class="nblm-card surface-card pad-lg editor-card" id="nblm-文章频道-她既想死又想去巴黎-被品牌拍出来了">
-  <div class="nblm-header editor-head">
-    <span class="nblm-badge editor-badge">NBLM</span>
-    <span class="nblm-slug editor-slug">文章频道-她既想死又想去巴黎-被品牌拍出来了</span>
-    <span class="ver-hint editor-hint">← 滑去睇舊版（共 4 版）</span>
-  </div>
-  <h3 class="nblm-title editor-title">文章频道 - “她既想死又想去巴黎” ，被品牌拍出来了</h3>
-  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#777;color:#fff;font-size:12px;font-weight:700">🕒 新鮮度待查</span><span style="color:#666;font-size:12px;margin-left:8px">parse fail: 先按開場鐵律載入 registry／WIP，再上網核對這條 campaign 的最早發布與是否仍屬時效新聞。</span></div>
-  <div style="margin:6px 0"><span style="display:inline-block;padding:2px 9px;border-radius:11px;background:#7c3aed;color:#fff;font-size:12px;font-weight:700">🔬 研究mode（實時查料 grounding）</span><span style="color:#666;font-size:12px;margin-left:8px">內容涉及特定品牌案例且日期為2026年，屬於未來/未知資訊，需核實事實。</span></div>
-  <div class="ver-track editor-track" id="track-文章频道-她既想死又想去巴黎-被品牌拍出来了">
-    <div class="ver-panel editor-panel" data-slug="文章频道-她既想死又想去巴黎-被品牌拍出来了" data-idx="0">
-      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge newest">最新</span>
-        <span class="ver-note editor-note">執聲(Curation NB)</span><span class="ver-ts editor-ts">2026-08-13T06:04</span></div>
-      <div class="nblm-body editor-body">一句文案，看得我整個人瞬間清醒。「她既想死，又想去巴黎。」這句文案真的夠薑，辛辣得直衝腦門，直覺反應就只有兩個字：到肉。平日度橋度到頭痛的廣告人，邊有呢份薑氣？這種極端對比拉扯出的張力，根本不需要任何官腔開場白，單憑字面上那種「一係死、一係去巴黎」的狂妄，便已贏了九成。這份巨大的張力，歸根究底是源於對人性的極致洞察。夠膽，就贏咗一半。
-
-這句標題背後，精準抓牢了當代女性——尤其是那群 Gen Z 與 Millennials 靈魂深處的「精神內耗」。生活已經攰到想原地消失，覺得人生虛無到極點，但骨子裏對「巴黎」這個審美符號，偏偏還有一份死唔斷氣的執著。這種又頹廢又精緻的 Emo 狀態，就是最毒辣的 consumer insight。品牌名字 NEIWAI（內外）在這次企劃中更玩得出神入化：內心（internal）是想死的絕望，外在（external）是對巴黎的物慾嚮往。這種內外撕裂的真實感，比起那些只懂販賣罐頭正能量的廣告，層次高了不止十條街。夠真，先至到肉。
-
-這鋪 strategy 行得極偏，但偏偏偏得極之矜貴。她們完全跳出了販賣產品功能、賣舒適度的死胡同，轉身去販賣一種文學性的價值觀。參考返我之前講過 Hermès 那份不屑靠明星名氣的自信，NEIWAI 這次正是透過文藝敘事去建立一種精神上的 connection。她們不屑大喊口號，反而用一段看似「拋書袋」的文字來設下門檻。你看不懂？覺得太負面？咁你根本唔係佢個 target。這種刻意築起的「門檻」，反而製造出一種高級的貴氣，讓目標消費者深感被理解，甚至覺得自己在這份靈魂矛盾中得到了救贖。有門檻，先有貴氣。
-
-講到執行（craft），整條片的 mood and tone 處理得極有靈魂。充滿菲林感的粗粒子畫面，配上女主角那雙空洞卻帶着火花的眼神，加上亂糟糟的床單與窗外虛幻的光影，其 art direction 簡直是教科書級別。剪接節奏拋開了那種商業味濃的堆砌，而是帶著一種破碎的美感，每一幀 visual 都在與文案產生共振。這種製作絕非單純燒錢，而是燒腦去琢磨那份「不完美，但極之真」的 texture。不完美，先至係 craft。
-
-點解我會 buy？因為一個成功的 campaign，從來不需要去教消費者如何生活。這句文案，成功讓人在看透生活的殘酷與虛無之後，依然願意找個理由去說服自己：你配得起一份精緻，不論那是一件內衣，還是一個巴黎美夢。消費者買嘢，很多時候不過是找個理由去 justify 那個昂貴的價錢，好讓自己撐住那份對抗虛無的體面。這份赤裸裸的「物慾救贖」，我收貨。消費者最後之所以心甘情願埋單，正是因為這份狂妄的誠實，給了他們一個繼續活下去的完美藉口。埋單，買個藉口。</div>
-    </div>
-    <div class="ver-panel editor-panel" data-slug="文章频道-她既想死又想去巴黎-被品牌拍出来了" data-idx="1">
-      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge">舊版 −1</span>
-        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-08-13T06:04</span></div>
-      <div class="nblm-body editor-body">一句文案，睇到我成個人醒晒。「她既想死，又想去巴黎。」呢句嘢真係夠薑，辛辣到直衝腦門，直覺反應就係兩個字：到肉。一般度橋度到頭大嘅廣告人，邊有呢份薑氣？呢種極端對比帶出嚟嘅張力，唔需要官腔開場白，單憑字面上嗰種「一係死、一係去巴黎」嘅狂妄，已經贏咗大半。呢份張力係源於對人性嘅極致洞察，係正嘅。
-
-呢句標題背後抓準咗當代女性——尤其係班 Gen Z 同 Millennials 嗰種「精神內耗」。生活已經攰到想原地消失，覺得人生虛無到極點，但骨子裡對「巴黎」呢種審美符號仲有一份死唔斷氣嘅執著。呢種又頹又精緻嘅 Emo 狀態，就係最毒辣嘅 Consumer Insight。品牌名 NEIWAI (內外) 喺呢度玩得出神入化：內心（Internal）係想死嘅絕望，外在（External）係對巴黎嘅物慾嚮往。呢種內外撕裂嘅真實感，比起嗰啲只會賣正能量嘅廣告，層次高咗幾條街。
-
-呢鋪 Strategy 行得好偏，但偏得好矜貴。佢哋完全跳出咗賣產品功能、賣舒適度嘅框框，轉身去賣一種文學性嘅價值觀。參考返我之前講 Hermès 嗰份唔使靠明星嘅自信，NEIWAI 呢次係透過文藝敘事建立一種 Connection。佢哋唔大喊口號，反而係用一段睇落「拋書袋」嘅文字嚟做門檻。你睇唔明？覺得太負面？咁你根本唔係佢 target。呢種「門檻」反而製造咗一種貴氣，令目標消費者覺得被理解，甚至覺得自己喺呢份矛盾入面搵到救贖。
-
-講到 Craft，成段片嘅 Mood and Tone 處理得極之有靈魂。菲林感嘅粗粒子畫面，配埋女主嗰雙空洞得嚟又有火嘅眼神，加上亂糟糟嘅床單同窗外虛幻嘅光影，Art Direction 係教科書級別。剪接節奏唔係嗰種商業味濃嘅堆砌，而係有一種破碎嘅美感，每一幀 Visual 都喺度同文案共鳴。呢種製作唔係單純燒錢，係燒腦去磨嗰份「唔係完美，但係好真」嘅質感。
-
-點解我 Buy？因為一個成功嘅 Campaign 從來唔係要教人點樣生活。呢句文案成功令你喺睇透生活嘅殘酷之後，仍然願意搵個理由去說服自己：你值得擁有一份精緻，無論係一件內衣定係一個巴黎夢。買嘢好多時只係搵個理由去 justify 個價錢，去撐住嗰份對抗虛無嘅體面。呢份「物慾救贖」，我收貨。消費者最後肯「埋單」，就係因為呢份狂妄嘅誠實，俾咗佢哋一個生存落去嘅藉口。</div>
-    </div>
-    <div class="ver-panel editor-panel" data-slug="文章频道-她既想死又想去巴黎-被品牌拍出来了" data-idx="2">
-      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge">舊版 −2</span>
-        <span class="ver-note editor-note">執聲(Curation NB)</span><span class="ver-ts editor-ts">2026-08-12T05:51</span></div>
-      <div class="nblm-body editor-body">「她既想死又想去巴黎」。當這句文案在朋友圈瘋狂洗版時，我真的在 Office 樓下一邊抽煙，一邊呆站了幾秒。平日看慣了那些一味叫人「活出自我」、「擁抱正能量」的 cliché 廢話，老實講，聽見都想嘔，簡直是對創意最大的侮辱。出面班友成日問點解呢句嘢會爆，其實原因好簡單：因為他們根本不懂什麼叫人情味。這句話精準捕捉到現代人最不堪亦最真實的矛盾狀態，用廣東話講，真係「到肉」到不得了。在這個世界生存，邊個未試過有一刻攰到想即刻消失？但偏偏在最崩潰的邊緣，你心底裏依然會有一絲對美的貪戀，依然想看漂亮的事物，依然想去巴黎。這種想放棄卻又不甘心的掙扎，才是最人性化的地方。掙扎，先至係人。
-
-究竟這句標題憑什麼引爆全網？皆因其背後承載着一個極之深厚的消費者 insight。很多品牌至今仍停留在販賣 solution 的初級階段——你痛，我就給你一粒藥，但這個廣告直情是當你是知心朋友，拍拍你肩膀說句：我明呀。品牌看穿了現代女性在極度壓抑的社會中，那份靈魂深處的拉扯。「死亡」代表着一種徹底的解脫，而「巴黎」則象徵着極致的精緻與審美，兩者擺在一起竟然毫無違和感。這份精神內核直指人心，它告訴大眾：我看到你的掙扎，我懂你為何在想死的時候，依然渴望去巴黎。這種 connection 絕非靠數據或演算法可以推算出來，而是源於對人性近乎偏執的精準觀察。演算法算不出的，叫靈魂。
-
-從 Madman 的專業視角來看，這份 strategy 真的夠膽死，更是 brand positioning 的一次高級轉型。內外（NEIWAI）自當年的「致我們自己」系列開始，便已展現出類似 Hermès 那種不需要靠明星代言、無須大聲分辯的自信。她們敢於去擁抱「黑暗」與「靜態」，徹底跳出了單純販賣 functional benefit 的層次。以前可能還在糾結無鋼圈內衣有多舒服、多好着，現在講的，卻是品牌與你之間的靈魂連結。在這個資訊爆炸、碎片化到極點的時代，行貨廣告根本難以贏得 attention。這種「非典型」的敘事方式，反而能在漫天 noise 中突圍而出。品牌從不需要討好全世界，它只需精準擊中那群擁有相同頻率的 target audience。敢於擁抱負面情緒，反而顯得 brand 更有高度。討好全世界，等於無性格。
-
-再說到執行（craft）層面，整條片的第一眼感覺就是 cinematic 到極點。畫面呈現出那種頹廢得來又極之精緻的 texture，完全甩開了坊間那些過度打燈、死白、膠感極重的罐頭廣告。每一格畫面的氛圍感都極強，那種沉穩而略帶憂鬱的調子，將「想死」與「巴黎」這對矛盾體完美融合。這種視覺上的戲劇感，無疑是為了 service 背後的 message，讓整件事落地落得極穩。正如我之前評價 Muji 那套晾衫廣告或保時捷聖誕手繪動畫一樣，真正優秀的作品，靈魂是關鍵，絕非單靠 AI 生成一堆空洞鏡頭可以相提並論。膠感，絕非 craft。
-
-這場 campaign 留給廣告界的啟示極之直白：在 AI 時代，當技術已經全面平民化，細膩的 human touch 依然是最值錢的資產。你可以叫 AI 幫你寫一百句 positive quotes，但它永遠寫不出一句令你心裏「咕」一聲的「她既想死又想去巴黎」。這份對創意的偏執、對洞察的尊重，正是將一張 speculation sheet 變成一則撼動人心故事的關鍵。我個人真的極 buy 這種赤裸的真實感，在這個充滿偽善的世界裏，這份真誠實屬罕見。沒得不服，好的創意就是會告訴你：你這種如此矛盾的靈魂，其實都很美。人若失去了這份對美的貪心，與鹹魚根本沒有分別。無咗呢份貪心，同條鹹魚無異。</div>
-    </div>
-    <div class="ver-panel editor-panel" data-slug="文章频道-她既想死又想去巴黎-被品牌拍出来了" data-idx="3">
-      <div class="ver-meta editor-meta"><span class="ver-badge editor-badge">舊版 −3</span>
-        <span class="ver-note editor-note">預設</span><span class="ver-ts editor-ts">2026-08-12T05:51</span></div>
-      <div class="nblm-body editor-body">「她既想死又想去巴黎」。呢句文案喺我朋友圈洗版嗰陣，我真係喺 Office 樓下抽住煙呆咗幾秒。平時睇埋晒啲一味叫你「活出自我」、「擁抱正能量」嘅 Cliché 廢話，聽見都想嘔，簡直係對創意嘅侮辱。出面班友成日問點解呢句嘢會爆，其實係因為佢哋根本唔明乜嘢叫人情味。呢句話精準捕捉到現代人最核突亦最真實嘅矛盾狀態，用廣東話講真係「到肉」到不得了。喺呢個世界生存，邊個未試過有一刻覺得攰到想消失？偏偏喺嗰種崩潰邊緣，你心入面仲係會有一絲對美嘅貪戀，仲係想睇到靚嘅嘢，仲係想去巴黎。呢種想放棄但又唔甘心嘅掙扎，先係最人性化嘅地方。
-
-點解呢句標題會咁爆？因為佢背後係一個極之深厚嘅消費者洞察（Insight）。好多品牌仲係停留喺賣解決方案（Solution）嘅階段，你痛我就俾粒藥你食，但呢個廣告直頭係當你知心友，同你講句：我明呀。品牌看穿咗現代女性喺極度壓抑嘅社會入面，嗰種靈魂深處嘅拉扯。「死亡」代表住一種徹底嘅解脫，「巴黎」代表住一份極致嘅精緻同審美，兩樣嘢擺埋一齊完全冇違和感。呢份精神內核直指人心，佢話俾大眾聽：我睇到你嘅掙扎，我明你點解喺想死嘅時候仲想去巴黎。呢種 Connection 唔係靠數據或者演算法可以推算出來，係要對人性有近乎偏執嘅觀察先可以得出嚟。
-
-從 Madman 嘅專業視角睇，呢份 Strategy 真係夠晒大膽，係品牌定位（Positioning）嘅一次高級轉型。內外（NEIWAI）由當年「致我們自己」系列開始，已經展現出類似 Hermès 嗰種唔需要靠明星、唔需要大聲分辯嘅自信。佢哋敢去擁抱「黑暗」同「靜態」，跳出咗單純賣產品功能（Functional benefit）嘅層次。以前可能係講緊無鋼圈內衣有幾舒服、幾好著，宜家係講緊品牌同你之間嘅靈魂連結。喺呢個資訊爆炸、碎片化到極點嘅時代，一般嘅廣告好難贏得 Attention。呢種「非典型」嘅敘事方式，反而可以喺一大堆噪音入面突圍而出。品牌唔需要討好全世界，佢只要精準擊中嗰班有相同頻率嘅 Target audience。敢去擁抱負面情緒，反而顯得呢個品牌更有高度。
-
-再講執行（Craft），成條片嘅攝影同節奏真係 Cinematic 到一個點。畫面呈現出嗰種頹廢得嚟又極之精緻嘅質感（Texture），完全唔係出面嗰啲過度打燈、白到死、膠感重嘅鮮艷廣告。每一格畫面嘅氛圍感都好強，嗰種沈穩、略帶憂鬱嘅調子，將「想死」同「巴黎」呢對矛盾完美融合。呢種視覺上嘅戲劇感係為咗服務嗰份訊息（Message），令到成件事落地落得好穩。就好似我之前評價過 Muji 嗰套晾衫廣告或者保時捷手繪動畫一樣，好嘅作品一定要有一份靈魂喺度，唔可以單靠 AI 生成一堆空洞嘅鏡頭。
-
-呢份 Campaign 對廣告業嘅啟示好簡單：喺 AI 時代，技術已經平民化，但細膩嘅人性觀察（Human touch）仍然係最值錢嘅嘢。你可以叫 AI 幫你寫一百句 Positive quotes，但佢永遠寫唔出一句令人心入面「咕」一聲嘅「她既想死又想去巴黎」。呢份對創意嘅偏執、對洞察嘅尊重，先係令到廣告可以由一張「飛機稿」變成一個撼動人心故事嘅關鍵。我個人真係好 Buy 呢種赤裸嘅真實感，喺呢個充滿偽善嘅世界入面，呢份真誠實屬罕見。冇得唔服，好嘅創意話俾你聽：你呢種咁矛盾嘅靈魂，其實都好靚。人若果冇咗呢份對美嘅貪心，同條鹹魚真係冇乜分別。</div>
-    </div></div>
-  <div class="ver-dots editor-dots"><span class="ver-dot on"></span><span class="ver-dot"></span><span class="ver-dot"></span><span class="ver-dot"></span></div>
-  <div class="fc-box fact-box"><div class="fc-row fact-row"><span class="fc-pill fact-pill ok">✅1</span><span class="fc-pill fact-pill mute">❌0</span><span class="fc-pill fact-pill unv">⚠️3</span><button class="btn btn-ghost btn-sm" onclick="runFactcheck('文章频道-她既想死又想去巴黎-被品牌拍出来了',this)">🔍 核對資料</button></div><details class="fc-detail fact-detail" open><summary>核對結果（2026-08-13T06:06）</summary><div class="fc-flag fact-flag unv">⚠️ 該廣告使用的文案為「她既想死，又想去巴黎。」<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ NEIWAI 品牌在本次企劃中使用了文學性敘事。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div><div class="fc-flag fact-flag unv">⚠️ 廣告片採用了充滿菲林感的粗粒子畫面與特定藝術指導（art direction）。<span class="fc-note fact-note"> — 查唔到，自己 check</span></div></details></div>
-  <details class="src-panel source-panel">
-    <summary onclick="loadSources('文章频道-她既想死又想去巴黎-被品牌拍出来了')">🔍 揀 Source 重寫</summary>
-    <div id="src-文章频道-她既想死又想去巴黎-被品牌拍出来了" class="src-list source-list">載入中…</div>
-    <div class="rewrite-note-row source-note-row">
-      <input type="text" id="note-文章频道-她既想死又想去巴黎-被品牌拍出来了" class="rewrite-note source-note" placeholder="語氣指示（例：減負面 / 狠啲 / warm 啲）可留空">
-    </div>
-    <button class="btn btn-dark btn-sm" style="margin-top:8px"
-            onclick="rewriteWithSources('文章频道-她既想死又想去巴黎-被品牌拍出来了',this)">✍️ 用揀咗嘅 source 重新生文</button>
-  </details>
-  <div class="nblm-actions">
-    <button class="btn btn-dark btn-sm" onclick="saveWP('文章频道-她既想死又想去巴黎-被品牌拍出来了',this)">💾 存入 WP 草稿（最新版）</button>
-    <button class="btn btn-ghost btn-sm" onclick="runMulti('文章频道-她既想死又想去巴黎-被品牌拍出来了',this)">🔁 試其他 model 寫同一素材</button>
-  </div>
-  
-  <details style="margin-top:10px;border:1px solid #e3d9c6;border-radius:8px;background:#fbf8f1;padding:8px 12px"><summary style="cursor:pointer;font-weight:700">📁 用我自己 cap 嘅圖出 WP</summary><div style="font-size:13px;color:#555;margin:8px 0 4px">掉圖落 → <code style="background:#efe9da;padding:1px 5px;border-radius:4px">manual_stills/文章频道-她既想死又想去巴黎-被品牌拍出来了/</code>（<code>cover.*</code>=封面，<code>01.* 02.*…</code>=內文，jpg/png/heic 都得） · <span style="color:#999">未掉圖</span></div><button class="btn btn-dark btn-sm" style="margin-top:6px" onclick="saveWPManual('文章频道-她既想死又想去巴黎-被品牌拍出来了',this)">📁 我已掉好圖 → 出 WP</button></details>
 </div><nav class="quick-nav"><a href="inspiration.html">← 上一頁</a><a>第 2 / 4 頁</a><a href="inspiration-3.html">下一頁 →</a></nav></section>
   
   
